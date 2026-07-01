@@ -1,10 +1,945 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>AJTV</title>
-</head>
-<body>
-<h1>AJTV 테스트</h1>
-</body>
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BVG Airlines</title>
+    <meta
+      name="description"
+      content="BVG Airlines, a fictional Berlin-based all-yellow Boeing 707-120 airline preparing for launch."
+    />
+    <style>
+      :root {
+        --yellow: #ffd100;
+        --yellow-2: #f6b900;
+        --ink: #121212;
+        --coal: #252525;
+        --muted: #666a72;
+        --line: #e7dfc5;
+        --paper: #fff9e8;
+        --white: #ffffff;
+        --blue: #ccecff;
+        --green: #176b53;
+        --amber: #9a6500;
+        --shadow: 0 22px 70px rgba(18, 18, 18, 0.2);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      .site-header {
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 20;
+        background: rgba(255, 249, 232, 0.9);
+        border-bottom: 1px solid rgba(18, 18, 18, 0.09);
+        backdrop-filter: blur(18px);
+      }
+
+      .nav {
+        width: min(1180px, calc(100% - 32px));
+        height: 72px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        font-weight: 950;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 7px;
+        background: var(--yellow);
+        color: var(--ink);
+        box-shadow: inset 0 -5px 0 rgba(18, 18, 18, 0.18);
+      }
+
+      .brand-word {
+        display: grid;
+        line-height: 1;
+      }
+
+      .brand-word strong {
+        font-size: 1.1rem;
+      }
+
+      .brand-word span {
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        color: #353535;
+        font-size: 0.93rem;
+        font-weight: 800;
+      }
+
+      .nav-cta {
+        min-height: 42px;
+        padding: 0 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 7px;
+        background: var(--ink);
+        color: var(--white);
+        font-weight: 900;
+      }
+
+      .hero {
+        min-height: 790px;
+        padding: 112px 0 52px;
+        position: relative;
+        display: grid;
+        align-items: end;
+        overflow: hidden;
+        background: var(--blue);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0;
+        height: 48%;
+        background: linear-gradient(
+          to top,
+          rgba(255, 249, 232, 1),
+          rgba(255, 249, 232, 0.84),
+          rgba(255, 249, 232, 0)
+        );
+        pointer-events: none;
+      }
+
+      .hero-image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        display: grid;
+        gap: 28px;
+      }
+
+      .hero-copy {
+        width: min(760px, 100%);
+      }
+
+      .eyebrow {
+        width: fit-content;
+        padding: 8px 12px;
+        border-radius: 7px;
+        background: rgba(255, 209, 0, 0.94);
+        color: var(--ink);
+        font-size: 0.82rem;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 18px 0 16px;
+        font-size: clamp(3rem, 8vw, 7.8rem);
+        line-height: 0.92;
+        letter-spacing: 0;
+      }
+
+      .hero-copy p {
+        width: min(620px, 100%);
+        margin: 0;
+        color: #262626;
+        font-size: clamp(1.02rem, 2vw, 1.23rem);
+        line-height: 1.55;
+        font-weight: 700;
+      }
+
+      .launch-board {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        border: 1px solid rgba(18, 18, 18, 0.12);
+        border-radius: 8px;
+        overflow: hidden;
+        background: rgba(18, 18, 18, 0.12);
+        box-shadow: var(--shadow);
+      }
+
+      .launch-item {
+        min-height: 112px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.94);
+      }
+
+      .launch-item span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .launch-item strong {
+        display: block;
+        margin-top: 14px;
+        font-size: clamp(1.3rem, 2vw, 1.85rem);
+        line-height: 1;
+      }
+
+      .booking {
+        display: grid;
+        gap: 18px;
+        padding: 18px;
+        border: 1px solid rgba(18, 18, 18, 0.1);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: var(--shadow);
+      }
+
+      .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .tab {
+        min-height: 40px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: var(--white);
+        color: #383a3e;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .tab[aria-selected="true"] {
+        border-color: var(--ink);
+        background: var(--yellow);
+        color: var(--ink);
+      }
+
+      .booking-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 1.15fr 1fr 1fr 0.95fr auto;
+        gap: 10px;
+        align-items: end;
+      }
+
+      label {
+        display: grid;
+        gap: 7px;
+        min-width: 0;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      input,
+      select {
+        width: 100%;
+        min-height: 52px;
+        border: 1px solid #ded5bb;
+        border-radius: 7px;
+        padding: 0 13px;
+        background: #fffdf7;
+        color: var(--ink);
+        font-weight: 850;
+      }
+
+      .search-btn {
+        min-width: 142px;
+        min-height: 52px;
+        border: 0;
+        border-radius: 7px;
+        background: var(--ink);
+        color: var(--white);
+        font-weight: 950;
+        cursor: pointer;
+      }
+
+      main {
+        position: relative;
+        z-index: 3;
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .section-inner {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .section-heading p {
+        max-width: 460px;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+        font-weight: 700;
+      }
+
+      .route-grid,
+      .fleet-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .route-card,
+      .fleet-card,
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--white);
+      }
+
+      .route-card {
+        min-height: 238px;
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+      }
+
+      .route-card::before {
+        content: "";
+        display: block;
+        height: 8px;
+        margin: -22px -22px 18px;
+        background: linear-gradient(90deg, var(--yellow), var(--ink));
+      }
+
+      .route-top,
+      .fleet-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        color: var(--muted);
+        font-weight: 850;
+      }
+
+      .route-code,
+      .tag {
+        width: fit-content;
+        padding: 7px 10px;
+        border-radius: 7px;
+        background: #fff3b5;
+        color: var(--amber);
+        font-size: 0.82rem;
+        font-weight: 950;
+      }
+
+      .route-card h3,
+      .fleet-card h3 {
+        margin: 44px 0 10px;
+        font-size: 1.9rem;
+        line-height: 1;
+      }
+
+      .route-card p,
+      .fleet-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+        font-weight: 700;
+      }
+
+      .feature-band {
+        background: var(--ink);
+        color: var(--white);
+      }
+
+      .fleet-card {
+        min-height: 254px;
+        padding: 24px;
+      }
+
+      .fleet-specs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 26px;
+      }
+
+      .spec {
+        padding: 12px;
+        border-radius: 7px;
+        background: rgba(255, 209, 0, 0.12);
+      }
+
+      .spec span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.75rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .spec strong {
+        display: block;
+        margin-top: 6px;
+      }
+
+      .ops-layout {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .panel {
+        padding: 24px;
+      }
+
+      .panel h3 {
+        margin: 0 0 12px;
+        font-size: 1.4rem;
+      }
+
+      .panel p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+        font-weight: 700;
+      }
+
+      .milestone-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .milestone {
+        display: grid;
+        grid-template-columns: 118px 1fr 100px;
+        gap: 14px;
+        align-items: center;
+        min-height: 68px;
+        padding: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 8px;
+        background: #1b1b1b;
+      }
+
+      .milestone strong {
+        color: var(--white);
+      }
+
+      .milestone span {
+        color: rgba(255, 255, 255, 0.68);
+        font-weight: 700;
+      }
+
+      .pill {
+        width: fit-content;
+        padding: 7px 10px;
+        border-radius: 7px;
+        background: #fff3b5;
+        color: var(--amber);
+        font-size: 0.82rem;
+        font-weight: 950;
+      }
+
+      .footer {
+        padding: 42px 0;
+        background: #101010;
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .footer-inner {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .footer strong {
+        color: var(--white);
+      }
+
+      @media (max-width: 980px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero {
+          min-height: 900px;
+        }
+
+        .hero-image {
+          object-position: 58% center;
+        }
+
+        .launch-board,
+        .booking-grid,
+        .route-grid,
+        .fleet-grid,
+        .ops-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .section-heading {
+          align-items: start;
+          flex-direction: column;
+        }
+
+        .milestone {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .nav {
+          width: min(100% - 24px, 1180px);
+          height: 64px;
+        }
+
+        .brand-word span {
+          display: none;
+        }
+
+        .nav-cta {
+          min-height: 38px;
+          padding: 0 12px;
+          font-size: 0.86rem;
+        }
+
+        .hero {
+          min-height: 880px;
+          padding-top: 92px;
+        }
+
+        .hero-inner {
+          width: min(100% - 24px, 1180px);
+        }
+
+        .tabs {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .tab {
+          padding: 0 8px;
+          font-size: 0.84rem;
+        }
+
+        .booking {
+          padding: 14px;
+        }
+
+        .search-btn {
+          width: 100%;
+        }
+
+        .section {
+          padding: 54px 0;
+        }
+
+        .fleet-specs,
+        .milestone {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="주요 메뉴">
+        <a class="brand" href="#top" aria-label="BVG Airlines home">
+          <span class="brand-mark" aria-hidden="true">B</span>
+          <span class="brand-word">
+            <strong>BVG</strong>
+            <span>Airlines</span>
+          </span>
+        </a>
+        <div class="nav-links" aria-label="사이트 메뉴">
+          <a href="#book">예약 대기</a>
+          <a href="#routes">예정 노선</a>
+          <a href="#fleet">보유기단</a>
+          <a href="#launch">런칭 현황</a>
+        </div>
+        <a class="nav-cta" href="#book">알림 신청</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="top">
+      <img
+        class="hero-image"
+        src="assets/bvg-hero-707-yellow.png"
+        alt="올 옐로우 도색의 BVG 707-120 항공기가 베를린 상공을 비행하는 모습"
+      />
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow">Berlin based · Preparing for launch</div>
+          <h1>BVG Airlines</h1>
+          <p>
+            베를린을 허브로 준비 중인 올 옐로우 항공사. 첫 기재는
+            Boeing 707-120이며, 하나의 노선부터 차근차근 운항을 시작합니다.
+          </p>
+        </div>
+
+        <div class="launch-board" aria-label="항공사 핵심 정보">
+          <div class="launch-item">
+            <span>Hub airport</span>
+            <strong id="hubAirport">Berlin BER</strong>
+          </div>
+          <div class="launch-item">
+            <span>Status</span>
+            <strong id="airlineStatus">운항 준비중</strong>
+          </div>
+          <div class="launch-item">
+            <span>Launch aircraft</span>
+            <strong id="launchAircraft">707-120</strong>
+          </div>
+          <div class="launch-item">
+            <span>Livery</span>
+            <strong>All Yellow</strong>
+          </div>
+        </div>
+
+        <form class="booking" id="book">
+          <div class="tabs" role="tablist" aria-label="예약 유형">
+            <button class="tab" type="button" aria-selected="true">사전예약</button>
+            <button class="tab" type="button" aria-selected="false">노선알림</button>
+            <button class="tab" type="button" aria-selected="false">멤버십</button>
+          </div>
+          <div class="booking-grid">
+            <label>
+              출발
+              <select id="originSelect" aria-label="출발지"></select>
+            </label>
+            <label>
+              도착
+              <select id="destinationSelect" aria-label="도착지"></select>
+            </label>
+            <label>
+              예상 출발
+              <input type="month" value="2026-09" />
+            </label>
+            <label>
+              좌석
+              <select aria-label="좌석">
+                <option>Yellow Standard</option>
+                <option>Yellow Plus</option>
+                <option>Founders Seat</option>
+              </select>
+            </label>
+            <label>
+              승객
+              <select aria-label="승객 수">
+                <option>성인 1명</option>
+                <option>성인 2명</option>
+                <option>가족 4명</option>
+              </select>
+            </label>
+            <button class="search-btn" type="submit">알림 신청</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <main>
+      <section class="section" id="routes">
+        <div class="section-inner">
+          <div class="section-heading">
+            <h2>Planned Routes</h2>
+            <p>
+              첫 운항은 베를린에서 시작합니다. 노선은 아래 데이터만 바꾸면
+              카드와 예약 옵션에 바로 반영되도록 만들었습니다.
+            </p>
+          </div>
+          <div class="route-grid" id="routeGrid"></div>
+        </div>
+      </section>
+
+      <section class="section feature-band" id="fleet">
+        <div class="section-inner">
+          <div class="section-heading">
+            <h2>Launch Fleet</h2>
+            <p>
+              현재 공개된 초기 기단은 707-120 한 기종입니다. 추가 도입분은
+              같은 데이터 배열에 넣으면 자동으로 표시됩니다.
+            </p>
+          </div>
+          <div class="fleet-grid" id="fleetGrid"></div>
+        </div>
+      </section>
+
+      <section class="section" id="launch">
+        <div class="section-inner">
+          <div class="section-heading">
+            <h2>Launch Desk</h2>
+            <p>운항 준비 단계와 첫 노선 오픈 현황을 보여주는 영역입니다.</p>
+          </div>
+          <div class="ops-layout">
+            <aside class="panel">
+              <h3>Berlin First</h3>
+              <p>
+                BVG는 베를린 브란덴부르크 공항을 기반으로 시작하는 가상의
+                항공사입니다. 실제 예약 판매 전 단계이므로 화면은 포트폴리오용
+                런칭 콘셉트로 구성했습니다.
+              </p>
+            </aside>
+            <div class="milestone-list" id="milestoneList"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <strong>BVG Airlines</strong>
+        <span>Fictional airline website concept for portfolio use.</span>
+      </div>
+    </footer>
+
+    <script>
+      const siteData = {
+        hub: {
+          city: "Berlin",
+          airport: "Berlin Brandenburg",
+          code: "BER",
+        },
+        status: "운항 준비중",
+        routes: [
+          {
+            from: "Berlin",
+            fromCode: "BER",
+            to: "Paris",
+            toCode: "CDG",
+            launch: "Route 01",
+            note: "첫 번째 공개 예정 노선",
+            status: "준비중",
+          },
+          {
+            from: "Berlin",
+            fromCode: "BER",
+            to: "Rome",
+            toCode: "FCO",
+            launch: "Route 02",
+            note: "두 번째 후보 노선",
+            status: "검토중",
+          },
+          {
+            from: "Berlin",
+            fromCode: "BER",
+            to: "London",
+            toCode: "LGW",
+            launch: "Route 03",
+            note: "초기 서유럽 연결 노선",
+            status: "검토중",
+          },
+        ],
+        fleet: [
+          {
+            type: "Boeing 707-120",
+            count: 1,
+            role: "Launch aircraft",
+            livery: "Full yellow",
+            cabin: "Single aisle classic jet",
+            status: "도입 준비",
+          },
+        ],
+        milestones: [
+          {
+            date: "Step 01",
+            title: "707-120 브랜딩 공개",
+            status: "완료",
+          },
+          {
+            date: "Step 02",
+            title: "BER 기반 운항 준비",
+            status: "진행중",
+          },
+          {
+            date: "Step 03",
+            title: "첫 정기 노선 발표",
+            status: "예정",
+          },
+        ],
+      };
+
+      const tabs = document.querySelectorAll(".tab");
+      const routeGrid = document.querySelector("#routeGrid");
+      const fleetGrid = document.querySelector("#fleetGrid");
+      const milestoneList = document.querySelector("#milestoneList");
+      const originSelect = document.querySelector("#originSelect");
+      const destinationSelect = document.querySelector("#destinationSelect");
+
+      function routeLabel(route) {
+        return `${route.fromCode} - ${route.toCode}`;
+      }
+
+      function renderRoutes() {
+        const origins = new Set();
+        const destinations = new Set();
+
+        routeGrid.innerHTML = siteData.routes
+          .map((route) => {
+            origins.add(`${route.from} ${route.fromCode}`);
+            destinations.add(`${route.to} ${route.toCode}`);
+
+            return `
+              <article class="route-card">
+                <div class="route-top">
+                  <span>${route.launch}</span>
+                  <span class="route-code">${routeLabel(route)}</span>
+                </div>
+                <div>
+                  <h3>${route.to}</h3>
+                  <p>${route.note}</p>
+                  <p class="tag">${route.status}</p>
+                </div>
+              </article>
+            `;
+          })
+          .join("");
+
+        originSelect.innerHTML = [...origins]
+          .map((origin) => `<option>${origin}</option>`)
+          .join("");
+
+        destinationSelect.innerHTML = [...destinations]
+          .map((destination) => `<option>${destination}</option>`)
+          .join("");
+      }
+
+      function renderFleet() {
+        fleetGrid.innerHTML = siteData.fleet
+          .map(
+            (aircraft) => `
+              <article class="fleet-card">
+                <div class="fleet-top">
+                  <span>${aircraft.role}</span>
+                  <span class="tag">${aircraft.status}</span>
+                </div>
+                <h3>${aircraft.type}</h3>
+                <p>${aircraft.count} aircraft prepared for BVG's first launch phase.</p>
+                <div class="fleet-specs">
+                  <div class="spec">
+                    <span>Livery</span>
+                    <strong>${aircraft.livery}</strong>
+                  </div>
+                  <div class="spec">
+                    <span>Cabin</span>
+                    <strong>${aircraft.cabin}</strong>
+                  </div>
+                </div>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      function renderMilestones() {
+        milestoneList.innerHTML = siteData.milestones
+          .map(
+            (item) => `
+              <div class="milestone">
+                <strong>${item.date}</strong>
+                <span>${item.title}</span>
+                <span class="pill">${item.status}</span>
+              </div>
+            `
+          )
+          .join("");
+      }
+
+      function renderSummary() {
+        document.querySelector("#hubAirport").textContent =
+          `${siteData.hub.city} ${siteData.hub.code}`;
+        document.querySelector("#airlineStatus").textContent = siteData.status;
+        document.querySelector("#launchAircraft").textContent =
+          siteData.fleet[0].type.replace("Boeing ", "");
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((item) => item.setAttribute("aria-selected", "false"));
+          tab.setAttribute("aria-selected", "true");
+        });
+      });
+
+      document.querySelector(".booking").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const button = event.currentTarget.querySelector(".search-btn");
+        button.textContent = "신청 완료";
+        window.setTimeout(() => {
+          button.textContent = "알림 신청";
+        }, 1400);
+      });
+
+      renderSummary();
+      renderRoutes();
+      renderFleet();
+      renderMilestones();
+    </script>
+  </body>
 </html>
