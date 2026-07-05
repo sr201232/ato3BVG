@@ -4,17 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>BVG</title>
-    <meta name="description" content="ATO3 airline website for BVG." />
+    <meta name="description" content="BVG is an ATO3 virtual airline based in Berlin." />
     <link rel="icon" href="bvg-logo.svg" type="image/svg+xml" />
     <style>
       :root {
         --yellow: #f7dd12;
-        --ink: #17191e;
-        --muted: #626b78;
-        --line: #e4e6eb;
-        --paper: #f7f7f2;
+        --ink: #15171c;
+        --muted: #69717d;
+        --line: #dfe3e8;
+        --paper: #f6f6f0;
         --white: #ffffff;
-        --green: #143f36;
+        --green: #0f5b46;
       }
 
       * {
@@ -38,18 +38,25 @@
         text-decoration: none;
       }
 
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
       .site-header {
         position: sticky;
         top: 0;
         z-index: 20;
-        background: rgba(247, 247, 242, 0.94);
+        background: rgba(246, 246, 240, 0.95);
         border-bottom: 1px solid var(--line);
-        backdrop-filter: blur(16px);
+        backdrop-filter: blur(14px);
       }
 
       .nav {
         width: min(1180px, calc(100% - 32px));
-        height: 74px;
+        min-height: 74px;
         margin: 0 auto;
         display: flex;
         align-items: center;
@@ -61,7 +68,7 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        min-width: 150px;
+        min-width: 148px;
       }
 
       .brand-logo {
@@ -75,7 +82,7 @@
       }
 
       .brand-word strong {
-        font-size: 21px;
+        font-size: 22px;
         font-weight: 900;
       }
 
@@ -83,17 +90,17 @@
         margin-top: 5px;
         color: var(--muted);
         font-size: 11px;
-        font-weight: 800;
+        font-weight: 900;
         text-transform: uppercase;
       }
 
       .nav-links {
         display: flex;
         align-items: center;
-        gap: 26px;
-        color: #323843;
+        gap: 28px;
+        color: #2c323b;
         font-size: 14px;
-        font-weight: 800;
+        font-weight: 900;
       }
 
       .nav-cta,
@@ -115,8 +122,6 @@
         position: relative;
         min-height: calc(100vh - 74px);
         overflow: hidden;
-        display: grid;
-        align-items: stretch;
       }
 
       .hero-image {
@@ -131,7 +136,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(90deg, rgba(247, 247, 242, 0.93), rgba(247, 247, 242, 0.64), rgba(247, 247, 242, 0.08));
+        background: linear-gradient(90deg, rgba(246, 246, 240, 0.96), rgba(246, 246, 240, 0.76), rgba(246, 246, 240, 0.12));
       }
 
       .hero-inner {
@@ -139,9 +144,10 @@
         z-index: 1;
         width: min(1180px, calc(100% - 32px));
         margin: 0 auto;
-        padding: 58px 0 40px;
+        padding: 70px 0 36px;
         display: grid;
-        grid-template-columns: minmax(0, 620px);
+        grid-template-columns: minmax(0, 640px);
+        min-height: calc(100vh - 74px);
         align-content: center;
         gap: 28px;
       }
@@ -159,72 +165,31 @@
         text-transform: uppercase;
       }
 
-      h1,
-      h2,
-      h3,
-      p {
-        margin-top: 0;
-      }
-
       h1 {
         margin-bottom: 18px;
-        font-size: clamp(54px, 8vw, 110px);
-        line-height: 0.92;
+        font-size: clamp(62px, 10vw, 126px);
+        line-height: 0.9;
         letter-spacing: 0;
       }
 
-      .hero-copy p,
-      .section-heading p,
-      .panel p {
+      .hero-copy p {
+        max-width: 620px;
+        margin-bottom: 0;
         color: #303642;
-        font-size: 18px;
-        line-height: 1.72;
+        font-size: 20px;
+        line-height: 1.7;
         word-break: keep-all;
       }
 
-      .status-board {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        overflow: hidden;
-        border: 1px solid rgba(23, 25, 30, 0.18);
-        border-radius: 7px;
-        background: rgba(255, 255, 255, 0.86);
-      }
-
-      .status-item {
-        min-height: 132px;
-        padding: 26px;
-        border-right: 1px solid var(--line);
-        display: grid;
-        align-content: center;
-        gap: 14px;
-      }
-
-      .status-item:last-child {
-        border-right: 0;
-      }
-
-      .status-item span,
-      .stat-item span,
-      .spec span {
-        color: var(--muted);
-        font-size: 12px;
-        font-weight: 900;
-        text-transform: uppercase;
-      }
-
-      .status-item strong {
-        font-size: 26px;
-      }
-
       .booking {
+        width: min(100%, 940px);
         border: 1px solid var(--line);
         border-radius: 7px;
         background: var(--white);
-        box-shadow: 0 18px 50px rgba(23, 25, 30, 0.12);
+        box-shadow: 0 18px 50px rgba(21, 23, 28, 0.14);
       }
 
-      .tabs {
+      .booking-tabs {
         display: flex;
         border-bottom: 1px solid var(--line);
       }
@@ -248,7 +213,7 @@
 
       .booking-grid {
         display: grid;
-        grid-template-columns: repeat(5, 1fr) auto;
+        grid-template-columns: repeat(4, 1fr) auto;
         gap: 12px;
         padding: 16px;
         align-items: end;
@@ -285,17 +250,7 @@
       }
 
       .section {
-        padding: 76px 0;
-      }
-
-      .section-dark {
-        background: var(--ink);
-        color: var(--white);
-      }
-
-      .section-dark .section-heading p,
-      .section-dark .fleet-card p {
-        color: #d8dbe1;
+        padding: 74px 0;
       }
 
       .section-inner {
@@ -304,169 +259,153 @@
       }
 
       .section-heading {
-        max-width: 720px;
-        margin-bottom: 32px;
+        max-width: 760px;
+        margin-bottom: 30px;
+      }
+
+      .section-heading p,
+      .panel p {
+        color: #47505c;
+        font-size: 17px;
+        line-height: 1.7;
+        word-break: keep-all;
       }
 
       h2 {
         margin-bottom: 12px;
-        font-size: clamp(34px, 5vw, 64px);
+        font-size: clamp(36px, 5vw, 66px);
         line-height: 1;
       }
 
-      .stat-board,
-      .route-grid,
-      .fleet-grid {
+      .network-layout {
+        display: grid;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 18px;
+        align-items: start;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: var(--white);
+        padding: 24px;
+      }
+
+      .panel-head {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 20px;
+      }
+
+      .panel-head h3 {
+        margin-bottom: 6px;
+        font-size: 28px;
+      }
+
+      .panel-head p {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .route-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .route-row {
+        display: grid;
+        grid-template-columns: 100px 1fr 120px 86px;
+        gap: 14px;
+        align-items: center;
+        border-top: 1px solid var(--line);
+        padding: 15px 0;
+      }
+
+      .route-row:first-child {
+        border-top: 0;
+      }
+
+      .route-row strong {
+        font-size: 18px;
+      }
+
+      .muted {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .status {
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .fleet-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .fleet-card {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: #fbfbfb;
+        padding: 20px;
+      }
+
+      .fleet-card h3 {
+        margin-bottom: 6px;
+        font-size: 34px;
+      }
+
+      .fleet-card p {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.65;
+      }
+
+      .service-band {
+        background: var(--ink);
+        color: var(--white);
+      }
+
+      .service-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 18px;
       }
 
-      .stat-item,
-      .route-card,
-      .fleet-card,
-      .panel {
-        border: 1px solid var(--line);
+      .service-card {
+        border: 1px solid #333842;
         border-radius: 7px;
-        background: var(--white);
+        background: #20242c;
+        padding: 24px;
       }
 
-      .stat-item {
-        min-height: 156px;
-        padding: 28px;
-        display: grid;
-        align-content: center;
-        gap: 12px;
-      }
-
-      .stat-item strong {
-        font-size: 50px;
-      }
-
-      .route-card,
-      .fleet-card {
-        min-height: 238px;
-        padding: 22px;
-        display: grid;
-        align-content: space-between;
-        gap: 22px;
-      }
-
-      .fleet-card {
-        background: #22252c;
-        border-color: #363a43;
-      }
-
-      .card-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        color: var(--muted);
-        font-size: 13px;
-        font-weight: 900;
-      }
-
-      .route-card h3,
-      .fleet-card h3 {
+      .service-card h3 {
         margin-bottom: 10px;
-        font-size: 38px;
+        font-size: 24px;
       }
 
-      .route-card p,
-      .fleet-card p {
-        color: var(--muted);
-        line-height: 1.62;
+      .service-card p {
+        margin-bottom: 0;
+        color: #d8dbe1;
+        line-height: 1.65;
       }
 
-      .table-wrap {
-        overflow-x: auto;
-        border: 1px solid var(--line);
-        border-radius: 7px;
-        background: var(--white);
-      }
-
-      table {
-        width: 100%;
-        min-width: 720px;
-        border-collapse: collapse;
-      }
-
-      th,
-      td {
-        border-bottom: 1px solid var(--line);
-        padding: 22px 24px;
-        text-align: left;
-      }
-
-      th {
-        color: var(--muted);
-        font-size: 13px;
-        text-transform: uppercase;
-      }
-
-      tbody tr:last-child td {
-        border-bottom: 0;
-      }
-
-      .mark {
-        color: var(--green);
-        font-weight: 900;
-      }
-
-      .fleet-specs,
-      .ops-layout,
       .contact-layout,
       .form-grid {
         display: grid;
         gap: 18px;
       }
 
-      .fleet-specs {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .spec {
-        border-top: 1px solid #3a3e47;
-        padding-top: 14px;
-        display: grid;
-        gap: 8px;
-      }
-
-      .ops-layout,
       .contact-layout {
-        grid-template-columns: 0.85fr 1.15fr;
+        grid-template-columns: 0.8fr 1.2fr;
         align-items: start;
-      }
-
-      .panel {
-        padding: 26px;
-      }
-
-      .milestone-list {
-        display: grid;
-        gap: 12px;
-      }
-
-      .milestone {
-        display: grid;
-        grid-template-columns: 110px 1fr auto;
-        gap: 18px;
-        align-items: center;
-        border: 1px solid var(--line);
-        border-radius: 7px;
-        background: var(--white);
-        padding: 20px;
-      }
-
-      .fiction-note,
-      .form-note {
-        margin-top: 18px;
-        border-left: 4px solid var(--yellow);
-        padding: 12px 14px;
-        color: var(--muted);
-        background: #fafafa;
-        line-height: 1.62;
       }
 
       .contact-form {
@@ -476,6 +415,14 @@
 
       .form-grid {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .form-note {
+        border-left: 4px solid var(--yellow);
+        padding: 12px 14px;
+        color: var(--muted);
+        background: #fafafa;
+        line-height: 1.62;
       }
 
       .footer {
@@ -500,7 +447,6 @@
 
       @media (max-width: 920px) {
         .nav {
-          height: auto;
           padding: 14px 0;
           flex-wrap: wrap;
         }
@@ -516,28 +462,17 @@
           padding: 40px 0 28px;
         }
 
-        .status-board,
-        .stat-board,
-        .route-grid,
-        .fleet-grid,
         .booking-grid,
-        .ops-layout,
+        .network-layout,
+        .service-grid,
         .contact-layout,
         .form-grid {
           grid-template-columns: 1fr;
         }
 
-        .status-item {
-          border-right: 0;
-          border-bottom: 1px solid var(--line);
-        }
-
-        .status-item:last-child {
-          border-bottom: 0;
-        }
-
-        .milestone {
+        .route-row {
           grid-template-columns: 1fr;
+          gap: 6px;
         }
 
         .footer-inner {
@@ -560,12 +495,12 @@
           </span>
         </a>
         <div class="nav-links" aria-label="사이트 메뉴">
-          <a href="#book">예약 대기</a>
-          <a href="#routes">노선</a>
-          <a href="#fleet">기단</a>
+          <a href="#booking">예약</a>
+          <a href="#network">운항노선</a>
+          <a href="#fleet">보유기종</a>
           <a href="#support">고객센터</a>
         </div>
-        <a class="nav-cta" href="#support">문의하기</a>
+        <a class="nav-cta" href="#booking">예약하기</a>
       </nav>
     </header>
 
@@ -573,39 +508,16 @@
       <img class="hero-image" src="bvg-hero-707-yellow.png" alt="BVG 항공기" />
       <div class="hero-inner">
         <div class="hero-copy">
-          <div class="eyebrow">Berlin based · ATO3 airline</div>
+          <div class="eyebrow">Now operating from Berlin</div>
           <h1>BVG</h1>
-          <p>
-            BVG는 Berlin을 기반으로 유럽 주요 도시와 장거리 거점을 연결하는
-            ATO3 항공사입니다. 유럽권 노선은 B727-100, 장거리 노선은 B707-320B
-            기재로 운항 준비 중입니다.
-          </p>
+          <p>BVG는 베를린을 허브로 삼아 전 세계 주요 도시를 연결하는 ATO3 가상 항공사입니다.</p>
         </div>
 
-        <div class="status-board" aria-label="핵심 정보">
-          <div class="status-item">
-            <span>Base city</span>
-            <strong id="hubCity">Berlin</strong>
-          </div>
-          <div class="status-item">
-            <span>Status</span>
-            <strong id="airlineStatus">운항 준비 중</strong>
-          </div>
-          <div class="status-item">
-            <span>Fleet</span>
-            <strong id="launchAircraft">B727-100 / B707-320B</strong>
-          </div>
-          <div class="status-item">
-            <span>Network</span>
-            <strong id="networkCount">8 routes</strong>
-          </div>
-        </div>
-
-        <form class="booking" id="book">
-          <div class="tabs" role="tablist" aria-label="예약 유형">
-            <button class="tab" type="button" aria-selected="true">예약 대기</button>
-            <button class="tab" type="button" aria-selected="false">노선 알림</button>
-            <button class="tab" type="button" aria-selected="false">멤버십</button>
+        <form class="booking" id="booking">
+          <div class="booking-tabs" role="tablist" aria-label="예약 유형">
+            <button class="tab" type="button" aria-selected="true">항공권</button>
+            <button class="tab" type="button" aria-selected="false">운항조회</button>
+            <button class="tab" type="button" aria-selected="false">예약확인</button>
           </div>
           <div class="booking-grid">
             <label>
@@ -617,18 +529,11 @@
               <select id="destinationSelect" aria-label="도착지"></select>
             </label>
             <label>
-              기재
-              <select aria-label="기재">
-                <option>B727-100</option>
-                <option>B707-320B</option>
-              </select>
-            </label>
-            <label>
               좌석
               <select aria-label="좌석">
-                <option>Standard</option>
-                <option>Plus</option>
-                <option>Founders Seat</option>
+                <option>Economy</option>
+                <option>Premium</option>
+                <option>First</option>
               </select>
             </label>
             <label>
@@ -639,86 +544,64 @@
                 <option>가족 4명</option>
               </select>
             </label>
-            <button class="primary-btn" type="submit">알림 신청</button>
+            <button class="primary-btn" type="submit">검색</button>
           </div>
         </form>
       </div>
     </section>
 
     <main>
-      <section class="section" id="operations">
+      <section class="section" id="network">
         <div class="section-inner">
           <div class="section-heading">
-            <h2>Operation Status</h2>
-            <p>
-              BVG의 운항 준비 현황과 첫 노선 구성을 한눈에 확인할 수 있습니다.
-              노선과 기단 정보는 데이터 파일에서 따로 관리합니다.
-            </p>
+            <h2>운항노선</h2>
+            <p>베를린을 출발지로 하는 BVG의 현재 운항 노선입니다.</p>
           </div>
-          <div class="stat-board" id="statBoard"></div>
-        </div>
-      </section>
+          <div class="network-layout">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Route Network</h3>
+                  <p>도시명 기준으로 표시됩니다.</p>
+                </div>
+                <span class="tag" id="routeCount">8 routes</span>
+              </div>
+              <div class="route-list" id="routeList"></div>
+            </section>
 
-      <section class="section" id="routes">
-        <div class="section-inner">
-          <div class="section-heading">
-            <h2>Routes</h2>
-            <p>
-              첫 노선은 유럽권 B727-100 노선과 장거리 B707-320B 노선으로 구성됩니다.
-            </p>
-          </div>
-          <div class="route-grid" id="routeGrid"></div>
-        </div>
-      </section>
-
-      <section class="section" id="destinations">
-        <div class="section-inner">
-          <div class="section-heading">
-            <h2>Destinations</h2>
-            <p>도시명 기준의 BVG 첫 취항지 목록입니다. 공항명은 표시하지 않습니다.</p>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>도시</th>
-                  <th>기재</th>
-                  <th>여객</th>
-                  <th>화물</th>
-                  <th>상태</th>
-                </tr>
-              </thead>
-              <tbody id="destinationRows"></tbody>
-            </table>
+            <section class="panel" id="fleet">
+              <div class="panel-head">
+                <div>
+                  <h3>Fleet</h3>
+                  <p>노선별 운항 기종</p>
+                </div>
+                <span class="tag">운항 중</span>
+              </div>
+              <div class="fleet-list" id="fleetList"></div>
+            </section>
           </div>
         </div>
       </section>
 
-      <section class="section section-dark" id="fleet">
+      <section class="section service-band">
         <div class="section-inner">
           <div class="section-heading">
-            <h2>Fleet</h2>
-            <p>운용 기재는 유럽권 중거리용 B727-100과 장거리용 B707-320B로 구성됩니다.</p>
+            <h2>서비스</h2>
+            <p>BVG는 단순한 노선 안내보다 실제 항공사 홈페이지처럼 예약과 운항 정보를 중심으로 구성됩니다.</p>
           </div>
-          <div class="fleet-grid" id="fleetGrid"></div>
-        </div>
-      </section>
-
-      <section class="section" id="launch">
-        <div class="section-inner">
-          <div class="section-heading">
-            <h2>Operations Desk</h2>
-            <p>BVG의 노선 구성과 기단 운용 방향을 안내합니다.</p>
-          </div>
-          <div class="ops-layout">
-            <aside class="panel">
-              <h3>Berlin Based</h3>
-              <p>
-                BVG는 Berlin을 출발점으로 유럽 주요 도시와 장거리 거점을 연결합니다.
-                유럽권은 B727-100, 장거리 노선은 B707-320B로 구분해 운용합니다.
-              </p>
-            </aside>
-            <div class="milestone-list" id="milestoneList"></div>
+          <div class="service-grid">
+            <article class="service-card">
+              <h3>예약</h3>
+              <p>출발지와 도착지를 선택해 BVG 운항 노선을 확인할 수 있습니다.</p>
+            </article>
+            <article class="service-card">
+              <h3>운항</h3>
+              <p>모든 첫 노선은 현재 운항 중 상태로 안내됩니다.</p>
+            </article>
+            <article class="service-card">
+              <h3>기단</h3>
+              <p>B727-100과 B707-320B를 노선 성격에 맞춰 운용합니다.</p>
+            </article>
           </div>
         </div>
       </section>
@@ -726,22 +609,13 @@
       <section class="section" id="support">
         <div class="section-inner">
           <div class="section-heading">
-            <h2>Customer Center</h2>
-            <p>
-              노선 제안, 기단 설정, 사이트 수정 요청을 접수할 수 있는 문의 영역입니다.
-              실제 알림은 별도 폼 서비스 연결 후 사용할 수 있습니다.
-            </p>
+            <h2>고객센터</h2>
+            <p>노선 문의, 예약 문의, 사이트 수정 요청을 남길 수 있습니다.</p>
           </div>
           <div class="contact-layout">
             <aside class="panel">
               <h3>문의 안내</h3>
-              <p>
-                문의 유형과 관련 노선을 선택해 내용을 남길 수 있습니다. 답변이 필요한
-                경우 연락 가능한 이메일을 함께 입력해 주세요.
-              </p>
-              <div class="fiction-note">
-                이 웹사이트는 ATO3 게임 내 항공사 BVG의 홈페이지입니다.
-              </div>
+              <p>BVG 운항 정보와 노선 관련 문의를 접수하는 공간입니다.</p>
             </aside>
             <form class="panel contact-form" id="contactForm" method="post">
               <div class="form-grid">
@@ -759,9 +633,9 @@
                   문의 유형
                   <select name="type" required>
                     <option value="">선택</option>
-                    <option>노선 제안</option>
-                    <option>운항 설정</option>
-                    <option>기단 설정</option>
+                    <option>예약 문의</option>
+                    <option>노선 문의</option>
+                    <option>운항 정보</option>
                     <option>사이트 수정</option>
                   </select>
                 </label>
@@ -785,84 +659,49 @@
     <footer class="footer">
       <div class="footer-inner">
         <strong>BVG</strong>
-        <span id="footerNotice">ATO3 게임 내 항공사 BVG의 공식 홈페이지입니다.</span>
+        <span id="footerNotice">BVG는 ATO3 게임 내 가상 항공사입니다.</span>
       </div>
     </footer>
 
-    <script src="data.js?v=20260705-bvg-routes"></script>
+    <script src="data.js?v=20260705-operating"></script>
     <script>
       const tabs = document.querySelectorAll(".tab");
-      const routeGrid = document.querySelector("#routeGrid");
-      const fleetGrid = document.querySelector("#fleetGrid");
-      const milestoneList = document.querySelector("#milestoneList");
       const originSelect = document.querySelector("#originSelect");
       const destinationSelect = document.querySelector("#destinationSelect");
       const contactRouteSelect = document.querySelector("#contactRouteSelect");
-      const destinationRows = document.querySelector("#destinationRows");
-      const statBoard = document.querySelector("#statBoard");
+      const routeList = document.querySelector("#routeList");
+      const routeCount = document.querySelector("#routeCount");
+      const fleetList = document.querySelector("#fleetList");
       const contactForm = document.querySelector("#contactForm");
       const formNote = document.querySelector("#formNote");
+      const footerNotice = document.querySelector("#footerNotice");
 
       function routeLabel(route) {
         return `${route.from} - ${route.to}`;
-      }
-
-      function yesNo(value) {
-        return value ? '<span class="mark">O</span>' : "-";
-      }
-
-      function renderSummary() {
-        document.querySelector("#hubCity").textContent = siteData.hub.city;
-        document.querySelector("#airlineStatus").textContent = siteData.status.label;
-        document.querySelector("#launchAircraft").textContent = siteData.fleet
-          .map((aircraft) => aircraft.type)
-          .join(" / ");
-        document.querySelector("#networkCount").textContent = `${siteData.routes.length} routes`;
-        document.querySelector("#footerNotice").textContent = siteData.brand.notice;
-      }
-
-      function renderStats() {
-        statBoard.innerHTML = siteData.stats
-          .map(
-            (stat) => `
-              <div class="stat-item">
-                <span>${stat.label}</span>
-                <strong>${stat.value}</strong>
-              </div>
-            `
-          )
-          .join("");
       }
 
       function renderRoutes() {
         const origins = new Set();
         const destinations = new Set();
 
-        routeGrid.innerHTML = siteData.routes
+        routeList.innerHTML = siteData.routes
           .map((route) => {
             origins.add(route.from);
             destinations.add(route.to);
-
             return `
-              <article class="route-card">
-                <div class="card-top">
-                  <span>${route.number}</span>
-                  <span class="route-code">${route.aircraft}</span>
-                </div>
-                <div>
-                  <h3>${route.to}</h3>
-                  <p>${route.note}</p>
-                  <p class="tag">${route.status}</p>
-                </div>
-              </article>
+              <div class="route-row">
+                <span class="muted">${route.number}</span>
+                <strong>${route.from} - ${route.to}</strong>
+                <span class="route-code">${route.aircraft}</span>
+                <span class="status">${route.status}</span>
+              </div>
             `;
           })
           .join("");
 
-        originSelect.innerHTML = [...origins]
-          .map((origin) => `<option>${origin}</option>`)
-          .join("");
+        routeCount.textContent = `${siteData.routes.length} routes`;
 
+        originSelect.innerHTML = [...origins].map((origin) => `<option>${origin}</option>`).join("");
         destinationSelect.innerHTML = [...destinations]
           .map((destination) => `<option>${destination}</option>`)
           .join("");
@@ -874,58 +713,16 @@
             .join("");
       }
 
-      function renderDestinations() {
-        destinationRows.innerHTML = siteData.destinations
-          .map(
-            (destination) => `
-              <tr>
-                <td>${destination.city}</td>
-                <td>${destination.aircraft}</td>
-                <td>${yesNo(destination.passenger)}</td>
-                <td>${yesNo(destination.cargo)}</td>
-                <td>${destination.status}</td>
-              </tr>
-            `
-          )
-          .join("");
-      }
-
       function renderFleet() {
-        fleetGrid.innerHTML = siteData.fleet
+        fleetList.innerHTML = siteData.fleet
           .map(
             (aircraft) => `
               <article class="fleet-card">
-                <div class="card-top">
-                  <span>${aircraft.countLabel}</span>
-                  <span class="tag">${aircraft.status}</span>
-                </div>
+                <span class="muted">${aircraft.role}</span>
                 <h3>${aircraft.type}</h3>
-                <p>${aircraft.role}</p>
-                <div class="fleet-specs">
-                  <div class="spec">
-                    <span>Full name</span>
-                    <strong>${aircraft.fullName}</strong>
-                  </div>
-                  <div class="spec">
-                    <span>Range</span>
-                    <strong>${aircraft.range}</strong>
-                  </div>
-                </div>
+                <p><strong>${aircraft.fullName}</strong></p>
+                <p>${aircraft.description}</p>
               </article>
-            `
-          )
-          .join("");
-      }
-
-      function renderMilestones() {
-        milestoneList.innerHTML = siteData.milestones
-          .map(
-            (item) => `
-              <div class="milestone">
-                <strong>${item.step}</strong>
-                <span>${item.title}</span>
-                <span class="tag">${item.status}</span>
-              </div>
             `
           )
           .join("");
@@ -941,29 +738,25 @@
       document.querySelector(".booking").addEventListener("submit", (event) => {
         event.preventDefault();
         const button = event.currentTarget.querySelector(".primary-btn");
-        button.textContent = "신청 완료";
+        button.textContent = "검색 완료";
         window.setTimeout(() => {
-          button.textContent = "알림 신청";
+          button.textContent = "검색";
         }, 1400);
       });
 
       contactForm.addEventListener("submit", (event) => {
         if (!siteData.contact.formEndpoint) {
           event.preventDefault();
-          formNote.textContent =
-            "아직 실제 알림 연결 전입니다. Formspree 주소를 data.js에 넣으면 이메일 알림을 받을 수 있습니다.";
+          formNote.textContent = "현재 문의 폼은 접수 화면만 제공됩니다. 이메일 알림 연결 후 실제 접수가 가능합니다.";
           return;
         }
 
         contactForm.action = siteData.contact.formEndpoint;
       });
 
-      renderSummary();
-      renderStats();
+      footerNotice.textContent = siteData.brand.notice;
       renderRoutes();
-      renderDestinations();
       renderFleet();
-      renderMilestones();
     </script>
   </body>
 </html>
