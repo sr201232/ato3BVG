@@ -1,3 +1,3 @@
 # BVG Airlines
 
-Fictional airline website concept for a Berlin-based, all-yellow Boeing 707-120 launch airline.
+Berlin-based fictional airline website concept for an ATO3 airline project.
