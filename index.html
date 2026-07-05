@@ -312,6 +312,7 @@
       .route-map {
         min-height: 460px;
         overflow: hidden;
+        background: linear-gradient(180deg, #f7fbff 0%, #eef5fb 100%);
       }
 
       .route-map svg {
@@ -321,11 +322,34 @@
         min-height: 410px;
       }
 
+      .map-water {
+        fill: #edf5fb;
+      }
+
+      .map-grid {
+        fill: none;
+        stroke: #d8e3eb;
+        stroke-width: 1;
+      }
+
+      .map-land {
+        fill: #dce5de;
+        stroke: #c5d1ca;
+        stroke-width: 1.2;
+      }
+
       .map-line {
-        stroke: #16191f;
-        stroke-width: 2.4;
+        fill: none;
+        stroke: #17191e;
+        stroke-width: 2.8;
         stroke-linecap: round;
-        opacity: 0.72;
+        opacity: 0.66;
+      }
+
+      .map-line.long {
+        stroke-width: 2.2;
+        stroke-dasharray: 7 7;
+        opacity: 0.58;
       }
 
       .map-hub {
@@ -350,6 +374,17 @@
         fill: var(--muted);
         font-size: 12px;
         font-weight: 800;
+      }
+
+      .map-plane {
+        fill: var(--ink);
+        font-size: 17px;
+        font-weight: 900;
+      }
+
+      .map-legend {
+        fill: rgba(255, 255, 255, 0.82);
+        stroke: #d8e3eb;
       }
 
       .route-list {
@@ -401,16 +436,14 @@
       .fleet-card p {
         margin-bottom: 0;
         color: var(--muted);
-        font-size: 15px;
-        line-height: 1.65;
+        font-size: 16px;
+        line-height: 1.78;
       }
 
-      .fleet-role {
-        display: inline-block;
-        margin-bottom: 20px;
-        color: var(--green);
-        font-size: 13px;
-        font-weight: 900;
+      .fleet-maker {
+        color: var(--ink);
+        font-size: 24px;
+        font-weight: 800;
       }
 
       .contact-layout,
@@ -581,42 +614,57 @@
               <svg viewBox="0 0 760 460" role="img" aria-labelledby="mapTitle mapDesc">
                 <title id="mapTitle">BVG route network</title>
                 <desc id="mapDesc">Berlin을 중심으로 BVG 취항 도시가 연결된 노선망 그림</desc>
-                <line class="map-line" x1="380" y1="230" x2="205" y2="115" />
-                <line class="map-line" x1="380" y1="230" x2="170" y2="215" />
-                <line class="map-line" x1="380" y1="230" x2="260" y2="325" />
-                <line class="map-line" x1="380" y1="230" x2="445" y2="340" />
-                <line class="map-line" x1="380" y1="230" x2="535" y2="150" />
-                <line class="map-line" x1="380" y1="230" x2="600" y2="95" />
-                <line class="map-line" x1="380" y1="230" x2="625" y2="265" />
-                <line class="map-line" x1="380" y1="230" x2="560" y2="365" />
+                <rect class="map-water" x="0" y="0" width="760" height="460" rx="18" />
+                <path class="map-grid" d="M80 0v460M190 0v460M300 0v460M410 0v460M520 0v460M630 0v460M0 92h760M0 184h760M0 276h760M0 368h760" />
+                <path class="map-land" d="M118 128c42-45 120-48 161-13 20 17 46 24 76 21 40-4 65 18 71 52 5 31-19 62-58 68-35 6-48 34-79 38-45 5-81-22-123-14-42 9-83-22-87-62-3-32 17-66 39-90z" />
+                <path class="map-land" d="M386 86c56-32 137-22 178 20 30 31 42 74 10 101-33 27-91 8-130 27-33 16-87 13-108-22-22-36 1-98 50-126z" />
+                <path class="map-land" d="M422 262c38-20 82-11 101 24 18 33 5 76-31 93-34 16-88 7-108-27-20-35 2-71 38-90z" />
+                <path class="map-land" d="M550 242c43-28 103-18 128 24 25 42 7 93-35 112-43 19-101-1-119-43-15-36-3-74 26-93z" />
 
-                <circle class="map-hub" cx="380" cy="230" r="18" />
-                <text class="map-label" x="380" y="204" text-anchor="middle">Berlin</text>
-                <text class="map-note" x="380" y="263" text-anchor="middle">BVG Hub</text>
+                <path class="map-line" d="M356 220Q297 144 207 119" />
+                <path class="map-line" d="M356 220Q253 193 166 216" />
+                <path class="map-line" d="M356 220Q269 283 246 346" />
+                <path class="map-line" d="M356 220Q399 290 441 342" />
+                <path class="map-line" d="M356 220Q439 162 530 147" />
+                <path class="map-line long" d="M356 220Q506 70 620 92" />
+                <path class="map-line long" d="M356 220Q530 185 644 270" />
+                <path class="map-line long" d="M356 220Q233 350 95 332" />
 
-                <circle class="map-dot" cx="205" cy="115" r="10" />
-                <text class="map-label" x="205" y="91" text-anchor="middle">London</text>
+                <circle class="map-hub" cx="356" cy="220" r="18" />
+                <text class="map-label" x="356" y="194" text-anchor="middle">Berlin</text>
+                <text class="map-note" x="356" y="253" text-anchor="middle">BVG Hub</text>
 
-                <circle class="map-dot" cx="170" cy="215" r="10" />
-                <text class="map-label" x="145" y="205" text-anchor="end">Paris</text>
+                <circle class="map-dot" cx="207" cy="119" r="9" />
+                <text class="map-label" x="207" y="95" text-anchor="middle">London</text>
 
-                <circle class="map-dot" cx="260" cy="325" r="10" />
-                <text class="map-label" x="260" y="357" text-anchor="middle">Madrid</text>
+                <circle class="map-dot" cx="166" cy="216" r="9" />
+                <text class="map-label" x="141" y="207" text-anchor="end">Paris</text>
 
-                <circle class="map-dot" cx="445" cy="340" r="10" />
-                <text class="map-label" x="445" y="374" text-anchor="middle">Rome</text>
+                <circle class="map-dot" cx="246" cy="346" r="9" />
+                <text class="map-label" x="246" y="380" text-anchor="middle">Madrid</text>
 
-                <circle class="map-dot" cx="535" cy="150" r="10" />
-                <text class="map-label" x="558" y="143">Moscow</text>
+                <circle class="map-dot" cx="441" cy="342" r="9" />
+                <text class="map-label" x="441" y="376" text-anchor="middle">Rome</text>
 
-                <circle class="map-dot" cx="600" cy="95" r="10" />
-                <text class="map-label" x="622" y="89">Seoul</text>
+                <circle class="map-dot" cx="530" cy="147" r="9" />
+                <text class="map-label" x="553" y="141">Moscow</text>
 
-                <circle class="map-dot" cx="625" cy="265" r="10" />
-                <text class="map-label" x="648" y="270">Hong Kong</text>
+                <circle class="map-dot" cx="620" cy="92" r="9" />
+                <text class="map-label" x="642" y="87">Seoul</text>
 
-                <circle class="map-dot" cx="560" cy="365" r="10" />
-                <text class="map-label" x="582" y="370">New York</text>
+                <circle class="map-dot" cx="644" cy="270" r="9" />
+                <text class="map-label" x="667" y="275">Hong Kong</text>
+
+                <circle class="map-dot" cx="95" cy="332" r="9" />
+                <text class="map-label" x="118" y="337">New York</text>
+
+                <text class="map-plane" x="279" y="151" transform="rotate(33 279 151)">✈</text>
+                <text class="map-plane" x="474" y="113" transform="rotate(-28 474 113)">✈</text>
+                <text class="map-plane" x="231" y="298" transform="rotate(-31 231 298)">✈</text>
+
+                <rect class="map-legend" x="24" y="24" width="178" height="54" rx="8" />
+                <text class="map-label" x="42" y="47">BVG Route Map</text>
+                <text class="map-note" x="42" y="66">Berlin hub network</text>
               </svg>
             </section>
 
@@ -701,7 +749,7 @@
       </div>
     </footer>
 
-    <script src="data.js?v=20260705-network-map"></script>
+    <script src="data.js?v=20260705-map-fleet-info"></script>
     <script>
       const tabs = document.querySelectorAll(".tab");
       const originSelect = document.querySelector("#originSelect");
@@ -750,8 +798,8 @@
           .map(
             (aircraft) => `
               <article class="fleet-card">
-                <span class="fleet-role">${aircraft.role}</span>
                 <h3>${aircraft.type}</h3>
+                <p class="fleet-maker">${aircraft.maker}</p>
                 <p><strong>${aircraft.fullName}</strong></p>
                 <p>${aircraft.description}</p>
               </article>
