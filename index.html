@@ -143,18 +143,17 @@
         position: relative;
         z-index: 1;
         width: min(1180px, calc(100% - 32px));
+        min-height: calc(100vh - 74px);
         margin: 0 auto;
         padding: 70px 0 36px;
         display: grid;
         grid-template-columns: minmax(0, 640px);
-        min-height: calc(100vh - 74px);
         align-content: center;
         gap: 28px;
       }
 
       .eyebrow,
-      .tag,
-      .route-code {
+      .tag {
         width: fit-content;
         border-radius: 5px;
         background: var(--yellow);
@@ -277,13 +276,6 @@
         line-height: 1;
       }
 
-      .network-layout {
-        display: grid;
-        grid-template-columns: 1.25fr 0.75fr;
-        gap: 18px;
-        align-items: start;
-      }
-
       .panel {
         border: 1px solid var(--line);
         border-radius: 7px;
@@ -310,18 +302,68 @@
         font-size: 14px;
       }
 
+      .route-section-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .route-map {
+        min-height: 460px;
+        overflow: hidden;
+      }
+
+      .route-map svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-height: 410px;
+      }
+
+      .map-line {
+        stroke: #16191f;
+        stroke-width: 2.4;
+        stroke-linecap: round;
+        opacity: 0.72;
+      }
+
+      .map-hub {
+        fill: var(--yellow);
+        stroke: var(--ink);
+        stroke-width: 3;
+      }
+
+      .map-dot {
+        fill: var(--white);
+        stroke: var(--ink);
+        stroke-width: 2.6;
+      }
+
+      .map-label {
+        fill: var(--ink);
+        font-size: 15px;
+        font-weight: 900;
+      }
+
+      .map-note {
+        fill: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
       .route-list {
         display: grid;
-        gap: 10px;
+        gap: 0;
       }
 
       .route-row {
         display: grid;
-        grid-template-columns: 100px 1fr 120px 86px;
+        grid-template-columns: 1fr auto;
         gap: 14px;
         align-items: center;
         border-top: 1px solid var(--line);
-        padding: 15px 0;
+        padding: 17px 0;
       }
 
       .route-row:first-child {
@@ -329,13 +371,7 @@
       }
 
       .route-row strong {
-        font-size: 18px;
-      }
-
-      .muted {
-        color: var(--muted);
-        font-size: 13px;
-        font-weight: 800;
+        font-size: 19px;
       }
 
       .status {
@@ -344,21 +380,22 @@
         font-weight: 900;
       }
 
-      .fleet-list {
+      .fleet-grid {
         display: grid;
-        gap: 14px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
       }
 
       .fleet-card {
         border: 1px solid var(--line);
         border-radius: 7px;
-        background: #fbfbfb;
-        padding: 20px;
+        background: var(--white);
+        padding: 26px;
       }
 
       .fleet-card h3 {
-        margin-bottom: 6px;
-        font-size: 34px;
+        margin-bottom: 8px;
+        font-size: 42px;
       }
 
       .fleet-card p {
@@ -368,33 +405,12 @@
         line-height: 1.65;
       }
 
-      .service-band {
-        background: var(--ink);
-        color: var(--white);
-      }
-
-      .service-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-      }
-
-      .service-card {
-        border: 1px solid #333842;
-        border-radius: 7px;
-        background: #20242c;
-        padding: 24px;
-      }
-
-      .service-card h3 {
-        margin-bottom: 10px;
-        font-size: 24px;
-      }
-
-      .service-card p {
-        margin-bottom: 0;
-        color: #d8dbe1;
-        line-height: 1.65;
+      .fleet-role {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 900;
       }
 
       .contact-layout,
@@ -463,16 +479,19 @@
         }
 
         .booking-grid,
-        .network-layout,
-        .service-grid,
+        .route-section-grid,
+        .fleet-grid,
         .contact-layout,
         .form-grid {
           grid-template-columns: 1fr;
         }
 
-        .route-row {
-          grid-template-columns: 1fr;
-          gap: 6px;
+        .route-map {
+          min-height: 360px;
+        }
+
+        .route-map svg {
+          min-height: 330px;
         }
 
         .footer-inner {
@@ -496,8 +515,8 @@
         </a>
         <div class="nav-links" aria-label="사이트 메뉴">
           <a href="#booking">예약</a>
-          <a href="#network">운항노선</a>
-          <a href="#fleet">보유기종</a>
+          <a href="#network">노선망</a>
+          <a href="#fleet">보유기재</a>
           <a href="#support">고객센터</a>
         </div>
         <a class="nav-cta" href="#booking">예약하기</a>
@@ -554,55 +573,74 @@
       <section class="section" id="network">
         <div class="section-inner">
           <div class="section-heading">
-            <h2>운항노선</h2>
-            <p>베를린을 출발지로 하는 BVG의 현재 운항 노선입니다.</p>
+            <h2>운항노선망</h2>
+            <p>베를린에서 출발하는 BVG의 현재 운항 도시입니다.</p>
           </div>
-          <div class="network-layout">
+          <div class="route-section-grid">
+            <section class="panel route-map" aria-label="BVG 운항노선망 그림">
+              <svg viewBox="0 0 760 460" role="img" aria-labelledby="mapTitle mapDesc">
+                <title id="mapTitle">BVG route network</title>
+                <desc id="mapDesc">Berlin을 중심으로 BVG 취항 도시가 연결된 노선망 그림</desc>
+                <line class="map-line" x1="380" y1="230" x2="205" y2="115" />
+                <line class="map-line" x1="380" y1="230" x2="170" y2="215" />
+                <line class="map-line" x1="380" y1="230" x2="260" y2="325" />
+                <line class="map-line" x1="380" y1="230" x2="445" y2="340" />
+                <line class="map-line" x1="380" y1="230" x2="535" y2="150" />
+                <line class="map-line" x1="380" y1="230" x2="600" y2="95" />
+                <line class="map-line" x1="380" y1="230" x2="625" y2="265" />
+                <line class="map-line" x1="380" y1="230" x2="560" y2="365" />
+
+                <circle class="map-hub" cx="380" cy="230" r="18" />
+                <text class="map-label" x="380" y="204" text-anchor="middle">Berlin</text>
+                <text class="map-note" x="380" y="263" text-anchor="middle">BVG Hub</text>
+
+                <circle class="map-dot" cx="205" cy="115" r="10" />
+                <text class="map-label" x="205" y="91" text-anchor="middle">London</text>
+
+                <circle class="map-dot" cx="170" cy="215" r="10" />
+                <text class="map-label" x="145" y="205" text-anchor="end">Paris</text>
+
+                <circle class="map-dot" cx="260" cy="325" r="10" />
+                <text class="map-label" x="260" y="357" text-anchor="middle">Madrid</text>
+
+                <circle class="map-dot" cx="445" cy="340" r="10" />
+                <text class="map-label" x="445" y="374" text-anchor="middle">Rome</text>
+
+                <circle class="map-dot" cx="535" cy="150" r="10" />
+                <text class="map-label" x="558" y="143">Moscow</text>
+
+                <circle class="map-dot" cx="600" cy="95" r="10" />
+                <text class="map-label" x="622" y="89">Seoul</text>
+
+                <circle class="map-dot" cx="625" cy="265" r="10" />
+                <text class="map-label" x="648" y="270">Hong Kong</text>
+
+                <circle class="map-dot" cx="560" cy="365" r="10" />
+                <text class="map-label" x="582" y="370">New York</text>
+              </svg>
+            </section>
+
             <section class="panel">
               <div class="panel-head">
                 <div>
-                  <h3>Route Network</h3>
+                  <h3>운항 도시</h3>
                   <p>도시명 기준으로 표시됩니다.</p>
                 </div>
                 <span class="tag" id="routeCount">8 routes</span>
               </div>
               <div class="route-list" id="routeList"></div>
             </section>
-
-            <section class="panel" id="fleet">
-              <div class="panel-head">
-                <div>
-                  <h3>Fleet</h3>
-                  <p>노선별 운항 기종</p>
-                </div>
-                <span class="tag">운항 중</span>
-              </div>
-              <div class="fleet-list" id="fleetList"></div>
-            </section>
           </div>
         </div>
       </section>
 
-      <section class="section service-band">
+      <section class="section" id="fleet">
         <div class="section-inner">
           <div class="section-heading">
-            <h2>서비스</h2>
-            <p>BVG는 단순한 노선 안내보다 실제 항공사 홈페이지처럼 예약과 운항 정보를 중심으로 구성됩니다.</p>
+            <h2>보유기재</h2>
+            <p>BVG가 운용하는 항공기입니다.</p>
           </div>
-          <div class="service-grid">
-            <article class="service-card">
-              <h3>예약</h3>
-              <p>출발지와 도착지를 선택해 BVG 운항 노선을 확인할 수 있습니다.</p>
-            </article>
-            <article class="service-card">
-              <h3>운항</h3>
-              <p>모든 첫 노선은 현재 운항 중 상태로 안내됩니다.</p>
-            </article>
-            <article class="service-card">
-              <h3>기단</h3>
-              <p>B727-100과 B707-320B를 노선 성격에 맞춰 운용합니다.</p>
-            </article>
-          </div>
+          <div class="fleet-grid" id="fleetGrid"></div>
         </div>
       </section>
 
@@ -663,7 +701,7 @@
       </div>
     </footer>
 
-    <script src="data.js?v=20260705-operating"></script>
+    <script src="data.js?v=20260705-network-map"></script>
     <script>
       const tabs = document.querySelectorAll(".tab");
       const originSelect = document.querySelector("#originSelect");
@@ -671,7 +709,7 @@
       const contactRouteSelect = document.querySelector("#contactRouteSelect");
       const routeList = document.querySelector("#routeList");
       const routeCount = document.querySelector("#routeCount");
-      const fleetList = document.querySelector("#fleetList");
+      const fleetGrid = document.querySelector("#fleetGrid");
       const contactForm = document.querySelector("#contactForm");
       const formNote = document.querySelector("#formNote");
       const footerNotice = document.querySelector("#footerNotice");
@@ -690,9 +728,7 @@
             destinations.add(route.to);
             return `
               <div class="route-row">
-                <span class="muted">${route.number}</span>
                 <strong>${route.from} - ${route.to}</strong>
-                <span class="route-code">${route.aircraft}</span>
                 <span class="status">${route.status}</span>
               </div>
             `;
@@ -700,25 +736,21 @@
           .join("");
 
         routeCount.textContent = `${siteData.routes.length} routes`;
-
         originSelect.innerHTML = [...origins].map((origin) => `<option>${origin}</option>`).join("");
         destinationSelect.innerHTML = [...destinations]
           .map((destination) => `<option>${destination}</option>`)
           .join("");
-
         contactRouteSelect.innerHTML =
           '<option value="">선택</option>' +
-          siteData.routes
-            .map((route) => `<option>${routeLabel(route)} · ${route.aircraft}</option>`)
-            .join("");
+          siteData.routes.map((route) => `<option>${routeLabel(route)}</option>`).join("");
       }
 
       function renderFleet() {
-        fleetList.innerHTML = siteData.fleet
+        fleetGrid.innerHTML = siteData.fleet
           .map(
             (aircraft) => `
               <article class="fleet-card">
-                <span class="muted">${aircraft.role}</span>
+                <span class="fleet-role">${aircraft.role}</span>
                 <h3>${aircraft.type}</h3>
                 <p><strong>${aircraft.fullName}</strong></p>
                 <p>${aircraft.description}</p>
