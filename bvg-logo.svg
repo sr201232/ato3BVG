@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 280" role="img" aria-labelledby="title">
-  <title id="title">BVG Airlines logo</title>
-  <path fill="#f7dd12" d="M160 258C98 199 24 151 5 91-11 41 22 4 67 4c31 0 55 17 73 42C158 21 188 4 221 4c48 0 82 38 94 83 16 61-86 127-155 171z"/>
-  <text x="160" y="153" text-anchor="middle" fill="#17191e" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="900" letter-spacing="2">BVG</text>
+  <title id="title">BVG logo</title>
+  <path fill="#f7dd12" d="M160 260C146 246 32 150 32 78C32 39 61 12 99 12C126 12 148 27 160 50C172 27 194 12 221 12C259 12 288 39 288 78C288 150 174 246 160 260Z"/>
+  <text x="160" y="151" text-anchor="middle" fill="#17191e" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="900" letter-spacing="2">BVG</text>
 </svg>
