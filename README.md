@@ -1,3 +1,3 @@
-# BVG Airlines
+# BVG
 
-Berlin-based fictional airline website concept for an ATO3 airline project.
+ATO3 게임 내 항공사 BVG의 홈페이지입니다.
