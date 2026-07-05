@@ -3,24 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BVG Airlines</title>
-    <meta
-      name="description"
-      content="BVG Airlines is a Berlin-based airline website concept preparing for launch."
-    />
+    <title>BVG</title>
+    <meta name="description" content="ATO3 airline website for BVG." />
     <link rel="icon" href="bvg-logo.svg" type="image/svg+xml" />
     <style>
       :root {
         --yellow: #f7dd12;
-        --yellow-deep: #f0a928;
         --ink: #17191e;
-        --charcoal: #202226;
-        --muted: #6b7280;
-        --line: #e6e1d3;
-        --paper: #fffaf0;
+        --muted: #626b78;
+        --line: #e4e6eb;
+        --paper: #f7f7f2;
         --white: #ffffff;
-        --green: #176b53;
-        --shadow: 0 20px 60px rgba(23, 25, 30, 0.18);
+        --green: #143f36;
       }
 
       * {
@@ -33,11 +27,10 @@
 
       body {
         margin: 0;
-        color: var(--ink);
         background: var(--paper);
-        font-family:
-          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-          "Segoe UI", sans-serif;
+        color: var(--ink);
+        font-family: Arial, "Noto Sans KR", sans-serif;
+        letter-spacing: 0;
       }
 
       a {
@@ -45,20 +38,13 @@
         text-decoration: none;
       }
 
-      button,
-      input,
-      select,
-      textarea {
-        font: inherit;
-      }
-
       .site-header {
-        position: fixed;
-        inset: 0 0 auto;
+        position: sticky;
+        top: 0;
         z-index: 20;
-        background: rgba(255, 250, 240, 0.92);
-        border-bottom: 1px solid rgba(23, 25, 30, 0.1);
-        backdrop-filter: blur(18px);
+        background: rgba(247, 247, 242, 0.94);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(16px);
       }
 
       .nav {
@@ -68,20 +54,19 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 22px;
+        gap: 18px;
       }
 
       .brand {
         display: flex;
         align-items: center;
         gap: 12px;
-        font-weight: 950;
+        min-width: 150px;
       }
 
       .brand-logo {
         width: 48px;
         height: 42px;
-        display: block;
       }
 
       .brand-word {
@@ -90,13 +75,14 @@
       }
 
       .brand-word strong {
-        font-size: 1.08rem;
+        font-size: 21px;
+        font-weight: 900;
       }
 
       .brand-word span {
         margin-top: 5px;
         color: var(--muted);
-        font-size: 0.72rem;
+        font-size: 11px;
         font-weight: 800;
         text-transform: uppercase;
       }
@@ -104,45 +90,33 @@
       .nav-links {
         display: flex;
         align-items: center;
-        gap: 22px;
-        color: #30333a;
-        font-size: 0.94rem;
-        font-weight: 850;
+        gap: 26px;
+        color: #323843;
+        font-size: 14px;
+        font-weight: 800;
       }
 
-      .nav-cta {
-        min-height: 42px;
-        padding: 0 16px;
-        display: inline-flex;
-        align-items: center;
+      .nav-cta,
+      .primary-btn {
+        border: 0;
         border-radius: 7px;
         background: var(--ink);
         color: var(--white);
+        font: inherit;
         font-weight: 900;
+        cursor: pointer;
+      }
+
+      .nav-cta {
+        padding: 13px 18px;
       }
 
       .hero {
-        min-height: 800px;
-        padding: 118px 0 54px;
         position: relative;
-        display: grid;
-        align-items: end;
+        min-height: calc(100vh - 74px);
         overflow: hidden;
-        background: #dfeefa;
-      }
-
-      .hero::after {
-        content: "";
-        position: absolute;
-        inset: auto 0 0;
-        height: 52%;
-        background: linear-gradient(
-          to top,
-          rgba(255, 250, 240, 1),
-          rgba(255, 250, 240, 0.85),
-          rgba(255, 250, 240, 0)
-        );
-        pointer-events: none;
+        display: grid;
+        align-items: stretch;
       }
 
       .hero-image {
@@ -151,169 +125,177 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: center;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(247, 247, 242, 0.93), rgba(247, 247, 242, 0.64), rgba(247, 247, 242, 0.08));
       }
 
       .hero-inner {
         position: relative;
-        z-index: 2;
+        z-index: 1;
         width: min(1180px, calc(100% - 32px));
         margin: 0 auto;
+        padding: 58px 0 40px;
         display: grid;
-        gap: 26px;
+        grid-template-columns: minmax(0, 620px);
+        align-content: center;
+        gap: 28px;
       }
 
-      .eyebrow {
+      .eyebrow,
+      .tag,
+      .route-code {
         width: fit-content;
-        padding: 8px 12px;
-        border-radius: 7px;
-        background: rgba(247, 221, 18, 0.96);
+        border-radius: 5px;
+        background: var(--yellow);
         color: var(--ink);
-        font-size: 0.8rem;
-        font-weight: 950;
-        text-transform: uppercase;
-      }
-
-      h1 {
-        max-width: 790px;
-        margin: 18px 0 16px;
-        font-size: clamp(3rem, 8vw, 7.6rem);
-        line-height: 0.92;
-        letter-spacing: 0;
-      }
-
-      .hero-copy p {
-        width: min(650px, 100%);
-        margin: 0;
-        color: #282b31;
-        font-size: clamp(1.02rem, 2vw, 1.23rem);
-        line-height: 1.55;
-        font-weight: 720;
-      }
-
-      .status-board,
-      .stat-board {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1px;
-        border: 1px solid rgba(23, 25, 30, 0.12);
-        border-radius: 8px;
-        overflow: hidden;
-        background: rgba(23, 25, 30, 0.12);
-        box-shadow: var(--shadow);
-      }
-
-      .status-item,
-      .stat-item {
-        min-height: 112px;
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.95);
-      }
-
-      .status-item span,
-      .stat-item span {
-        display: block;
-        color: var(--muted);
-        font-size: 0.78rem;
+        padding: 8px 12px;
+        font-size: 12px;
         font-weight: 900;
         text-transform: uppercase;
       }
 
-      .status-item strong,
-      .stat-item strong {
-        display: block;
-        margin-top: 13px;
-        font-size: clamp(1.35rem, 2vw, 1.9rem);
-        line-height: 1;
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 18px;
+        font-size: clamp(54px, 8vw, 110px);
+        line-height: 0.92;
+        letter-spacing: 0;
+      }
+
+      .hero-copy p,
+      .section-heading p,
+      .panel p {
+        color: #303642;
+        font-size: 18px;
+        line-height: 1.72;
+        word-break: keep-all;
+      }
+
+      .status-board {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        overflow: hidden;
+        border: 1px solid rgba(23, 25, 30, 0.18);
+        border-radius: 7px;
+        background: rgba(255, 255, 255, 0.86);
+      }
+
+      .status-item {
+        min-height: 132px;
+        padding: 26px;
+        border-right: 1px solid var(--line);
+        display: grid;
+        align-content: center;
+        gap: 14px;
+      }
+
+      .status-item:last-child {
+        border-right: 0;
+      }
+
+      .status-item span,
+      .stat-item span,
+      .spec span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .status-item strong {
+        font-size: 26px;
       }
 
       .booking {
-        display: grid;
-        gap: 18px;
-        padding: 18px;
-        border: 1px solid rgba(23, 25, 30, 0.1);
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.96);
-        box-shadow: var(--shadow);
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: var(--white);
+        box-shadow: 0 18px 50px rgba(23, 25, 30, 0.12);
       }
 
       .tabs {
         display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+        border-bottom: 1px solid var(--line);
       }
 
       .tab {
-        min-height: 40px;
-        padding: 0 14px;
-        border: 1px solid var(--line);
-        border-radius: 7px;
-        background: var(--white);
-        color: #383a3e;
+        min-width: 118px;
+        border: 0;
+        border-right: 1px solid var(--line);
+        background: transparent;
+        padding: 16px;
+        color: var(--muted);
+        font: inherit;
         font-weight: 900;
         cursor: pointer;
       }
 
       .tab[aria-selected="true"] {
-        border-color: var(--ink);
         background: var(--yellow);
         color: var(--ink);
       }
 
       .booking-grid {
         display: grid;
-        grid-template-columns: 1.1fr 1.1fr 1fr 1fr 0.9fr auto;
-        gap: 10px;
+        grid-template-columns: repeat(5, 1fr) auto;
+        gap: 12px;
+        padding: 16px;
         align-items: end;
       }
 
       label {
         display: grid;
-        gap: 7px;
-        min-width: 0;
-        color: var(--muted);
-        font-size: 0.78rem;
+        gap: 8px;
+        color: #373e4a;
+        font-size: 13px;
         font-weight: 900;
-        text-transform: uppercase;
       }
 
       input,
       select,
       textarea {
         width: 100%;
-        min-height: 52px;
-        border: 1px solid #ded5bb;
-        border-radius: 7px;
-        padding: 0 13px;
-        background: #fffdf7;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fbfbfb;
         color: var(--ink);
-        font-weight: 800;
+        font: inherit;
+        padding: 13px 12px;
       }
 
       textarea {
-        min-height: 140px;
-        padding-top: 13px;
+        min-height: 150px;
         resize: vertical;
       }
 
       .primary-btn {
-        min-height: 52px;
-        border: 0;
-        border-radius: 7px;
-        padding: 0 18px;
-        background: var(--ink);
-        color: var(--white);
-        font-weight: 950;
-        cursor: pointer;
+        min-height: 48px;
+        padding: 0 20px;
       }
 
       .section {
-        padding: 74px 0;
+        padding: 76px 0;
       }
 
       .section-dark {
-        background: var(--charcoal);
+        background: var(--ink);
         color: var(--white);
+      }
+
+      .section-dark .section-heading p,
+      .section-dark .fleet-card p {
+        color: #d8dbe1;
       }
 
       .section-inner {
@@ -322,361 +304,247 @@
       }
 
       .section-heading {
-        display: flex;
-        align-items: end;
-        justify-content: space-between;
-        gap: 24px;
-        margin-bottom: 26px;
+        max-width: 720px;
+        margin-bottom: 32px;
       }
 
       h2 {
-        margin: 0;
-        font-size: clamp(2rem, 4vw, 3.4rem);
+        margin-bottom: 12px;
+        font-size: clamp(34px, 5vw, 64px);
         line-height: 1;
-        letter-spacing: 0;
       }
 
-      .section-heading p {
-        max-width: 500px;
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.55;
-        font-weight: 700;
-      }
-
-      .section-dark .section-heading p {
-        color: rgba(255, 255, 255, 0.68);
-      }
-
+      .stat-board,
       .route-grid,
       .fleet-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        gap: 18px;
       }
 
+      .stat-item,
       .route-card,
       .fleet-card,
       .panel {
         border: 1px solid var(--line);
-        border-radius: 8px;
+        border-radius: 7px;
         background: var(--white);
       }
 
-      .section-dark .fleet-card,
-      .section-dark .panel {
-        border-color: rgba(255, 255, 255, 0.14);
-        background: #181a1e;
+      .stat-item {
+        min-height: 156px;
+        padding: 28px;
+        display: grid;
+        align-content: center;
+        gap: 12px;
       }
 
-      .route-card {
+      .stat-item strong {
+        font-size: 50px;
+      }
+
+      .route-card,
+      .fleet-card {
         min-height: 238px;
         padding: 22px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        overflow: hidden;
+        display: grid;
+        align-content: space-between;
+        gap: 22px;
       }
 
-      .route-card::before {
-        content: "";
-        display: block;
-        height: 8px;
-        margin: -22px -22px 18px;
-        background: linear-gradient(90deg, var(--yellow), var(--ink));
+      .fleet-card {
+        background: #22252c;
+        border-color: #363a43;
       }
 
       .card-top {
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        gap: 16px;
+        gap: 12px;
         color: var(--muted);
-        font-weight: 850;
-      }
-
-      .route-code,
-      .tag {
-        width: fit-content;
-        padding: 7px 10px;
-        border-radius: 7px;
-        background: #fff3b5;
-        color: #8a6100;
-        font-size: 0.82rem;
-        font-weight: 950;
+        font-size: 13px;
+        font-weight: 900;
       }
 
       .route-card h3,
       .fleet-card h3 {
-        margin: 44px 0 10px;
-        font-size: 1.9rem;
-        line-height: 1;
+        margin-bottom: 10px;
+        font-size: 38px;
       }
 
       .route-card p,
       .fleet-card p {
-        margin: 0;
         color: var(--muted);
-        line-height: 1.55;
-        font-weight: 700;
-      }
-
-      .section-dark .fleet-card p,
-      .section-dark .card-top {
-        color: rgba(255, 255, 255, 0.66);
-      }
-
-      .fleet-card {
-        min-height: 254px;
-        padding: 24px;
-      }
-
-      .fleet-specs {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        margin-top: 26px;
-      }
-
-      .spec {
-        padding: 12px;
-        border-radius: 7px;
-        background: rgba(247, 221, 18, 0.13);
-      }
-
-      .spec span {
-        display: block;
-        color: var(--muted);
-        font-size: 0.75rem;
-        font-weight: 900;
-        text-transform: uppercase;
-      }
-
-      .section-dark .spec span {
-        color: rgba(255, 255, 255, 0.58);
-      }
-
-      .spec strong {
-        display: block;
-        margin-top: 6px;
+        line-height: 1.62;
       }
 
       .table-wrap {
         overflow-x: auto;
         border: 1px solid var(--line);
-        border-radius: 8px;
+        border-radius: 7px;
         background: var(--white);
       }
 
       table {
         width: 100%;
-        min-width: 760px;
+        min-width: 720px;
         border-collapse: collapse;
       }
 
       th,
       td {
-        padding: 20px 22px;
         border-bottom: 1px solid var(--line);
+        padding: 22px 24px;
         text-align: left;
-        font-weight: 760;
       }
 
       th {
         color: var(--muted);
-        font-size: 0.82rem;
+        font-size: 13px;
         text-transform: uppercase;
       }
 
-      tr:nth-child(even) td {
-        background: #f5f6f7;
-      }
-
-      tr:last-child td {
+      tbody tr:last-child td {
         border-bottom: 0;
       }
 
       .mark {
-        font-weight: 950;
         color: var(--green);
+        font-weight: 900;
+      }
+
+      .fleet-specs,
+      .ops-layout,
+      .contact-layout,
+      .form-grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .fleet-specs {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .spec {
+        border-top: 1px solid #3a3e47;
+        padding-top: 14px;
+        display: grid;
+        gap: 8px;
       }
 
       .ops-layout,
       .contact-layout {
-        display: grid;
         grid-template-columns: 0.85fr 1.15fr;
-        gap: 18px;
-        align-items: stretch;
+        align-items: start;
       }
 
       .panel {
-        padding: 24px;
-      }
-
-      .panel h3 {
-        margin: 0 0 12px;
-        font-size: 1.4rem;
-      }
-
-      .panel p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.65;
-        font-weight: 700;
+        padding: 26px;
       }
 
       .milestone-list {
         display: grid;
-        gap: 10px;
+        gap: 12px;
       }
 
       .milestone {
         display: grid;
-        grid-template-columns: 118px 1fr 100px;
-        gap: 14px;
+        grid-template-columns: 110px 1fr auto;
+        gap: 18px;
         align-items: center;
-        min-height: 68px;
-        padding: 14px;
         border: 1px solid var(--line);
-        border-radius: 8px;
+        border-radius: 7px;
         background: var(--white);
+        padding: 20px;
       }
 
-      .milestone span {
+      .fiction-note,
+      .form-note {
+        margin-top: 18px;
+        border-left: 4px solid var(--yellow);
+        padding: 12px 14px;
         color: var(--muted);
-        font-weight: 750;
+        background: #fafafa;
+        line-height: 1.62;
       }
 
       .contact-form {
         display: grid;
-        gap: 12px;
+        gap: 16px;
       }
 
       .form-grid {
-        display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-
-      .form-note {
-        min-height: 24px;
-        color: var(--muted);
-        font-weight: 750;
-      }
-
-      .fiction-note {
-        padding: 14px 16px;
-        border-left: 4px solid var(--yellow);
-        background: rgba(247, 221, 18, 0.15);
-        color: var(--ink);
-        font-weight: 780;
-        line-height: 1.55;
       }
 
       .footer {
-        padding: 42px 0;
-        background: #101010;
-        color: rgba(255, 255, 255, 0.78);
+        border-top: 1px solid var(--line);
+        background: var(--white);
       }
 
       .footer-inner {
         width: min(1180px, calc(100% - 32px));
+        min-height: 86px;
         margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 20px;
-        flex-wrap: wrap;
+        gap: 18px;
+        color: var(--muted);
       }
 
       .footer strong {
-        color: var(--white);
+        color: var(--ink);
       }
 
-      @media (max-width: 980px) {
+      @media (max-width: 920px) {
+        .nav {
+          height: auto;
+          padding: 14px 0;
+          flex-wrap: wrap;
+        }
+
         .nav-links {
-          display: none;
+          order: 3;
+          width: 100%;
+          justify-content: space-between;
+          gap: 10px;
         }
 
-        .hero {
-          min-height: 900px;
-        }
-
-        .hero-image {
-          object-position: 58% center;
+        .hero-inner {
+          padding: 40px 0 28px;
         }
 
         .status-board,
         .stat-board,
-        .booking-grid,
         .route-grid,
         .fleet-grid,
+        .booking-grid,
         .ops-layout,
-        .contact-layout {
+        .contact-layout,
+        .form-grid {
           grid-template-columns: 1fr;
         }
 
-        .section-heading {
-          align-items: start;
-          flex-direction: column;
+        .status-item {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .status-item:last-child {
+          border-bottom: 0;
         }
 
         .milestone {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-
-      @media (max-width: 560px) {
-        .nav {
-          width: min(100% - 24px, 1180px);
-          height: 64px;
-        }
-
-        .brand-word span {
-          display: none;
-        }
-
-        .nav-cta {
-          min-height: 38px;
-          padding: 0 12px;
-          font-size: 0.86rem;
-        }
-
-        .hero {
-          min-height: 910px;
-          padding-top: 92px;
-        }
-
-        .hero-inner,
-        .section-inner {
-          width: min(100% - 24px, 1180px);
-        }
-
-        .tabs {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-        }
-
-        .tab {
-          padding: 0 8px;
-          font-size: 0.84rem;
-        }
-
-        .booking {
-          padding: 14px;
-        }
-
-        .primary-btn {
-          width: 100%;
-        }
-
-        .section {
-          padding: 54px 0;
-        }
-
-        .fleet-specs,
-        .milestone,
-        .form-grid {
           grid-template-columns: 1fr;
+        }
+
+        .footer-inner {
+          align-items: flex-start;
+          justify-content: center;
+          flex-direction: column;
+          padding: 22px 0;
         }
       }
     </style>
@@ -684,17 +552,17 @@
   <body>
     <header class="site-header">
       <nav class="nav" aria-label="주요 메뉴">
-        <a class="brand" href="#top" aria-label="BVG Airlines home">
+        <a class="brand" href="#top" aria-label="BVG home">
           <img class="brand-logo" src="bvg-logo.svg" alt="" />
           <span class="brand-word">
             <strong>BVG</strong>
-            <span>Airlines</span>
+            <span>Aviation</span>
           </span>
         </a>
         <div class="nav-links" aria-label="사이트 메뉴">
           <a href="#book">예약 대기</a>
-          <a href="#operations">운항현황</a>
-          <a href="#fleet">보유기종</a>
+          <a href="#routes">노선</a>
+          <a href="#fleet">기단</a>
           <a href="#support">고객센터</a>
         </div>
         <a class="nav-cta" href="#support">문의하기</a>
@@ -702,44 +570,40 @@
     </header>
 
     <section class="hero" id="top">
-      <img
-        class="hero-image"
-        src="bvg-hero-707-yellow.png"
-        alt="BVG 707-120 항공기가 비행하는 모습"
-      />
+      <img class="hero-image" src="bvg-hero-707-yellow.png" alt="BVG 항공기" />
       <div class="hero-inner">
         <div class="hero-copy">
-          <div class="eyebrow">Berlin based · Preparing for launch</div>
-          <h1>BVG Airlines</h1>
+          <div class="eyebrow">Berlin based · ATO3 airline</div>
+          <h1>BVG</h1>
           <p>
-            BVG Airlines는 Berlin Brandenburg Airport를 기반으로 정기 운항을
-            준비하고 있습니다. 초기 기재는 Boeing 707-120이며, 유럽 주요 도시를
-            잇는 첫 노선을 순차적으로 공개할 예정입니다.
+            BVG는 Berlin을 기반으로 유럽 주요 도시와 장거리 거점을 연결하는
+            ATO3 항공사입니다. 유럽권 노선은 B727-100, 장거리 노선은 B707-320B
+            기재로 운항 준비 중입니다.
           </p>
         </div>
 
-        <div class="status-board" aria-label="항공사 핵심 정보">
+        <div class="status-board" aria-label="핵심 정보">
           <div class="status-item">
-            <span>Hub airport</span>
-            <strong id="hubAirport">Berlin BER</strong>
+            <span>Base city</span>
+            <strong id="hubCity">Berlin</strong>
           </div>
           <div class="status-item">
             <span>Status</span>
-            <strong id="airlineStatus">취항 준비 중</strong>
+            <strong id="airlineStatus">운항 준비 중</strong>
           </div>
           <div class="status-item">
-            <span>Initial aircraft</span>
-            <strong id="launchAircraft">707-120</strong>
+            <span>Fleet</span>
+            <strong id="launchAircraft">B727-100 / B707-320B</strong>
           </div>
           <div class="status-item">
-            <span>Launch target</span>
-            <strong id="launchTarget">2026 Q3</strong>
+            <span>Network</span>
+            <strong id="networkCount">8 routes</strong>
           </div>
         </div>
 
         <form class="booking" id="book">
           <div class="tabs" role="tablist" aria-label="예약 유형">
-            <button class="tab" type="button" aria-selected="true">사전 예약</button>
+            <button class="tab" type="button" aria-selected="true">예약 대기</button>
             <button class="tab" type="button" aria-selected="false">노선 알림</button>
             <button class="tab" type="button" aria-selected="false">멤버십</button>
           </div>
@@ -753,8 +617,11 @@
               <select id="destinationSelect" aria-label="도착지"></select>
             </label>
             <label>
-              예상 출발
-              <input type="month" value="2026-09" />
+              기재
+              <select aria-label="기재">
+                <option>B727-100</option>
+                <option>B707-320B</option>
+              </select>
             </label>
             <label>
               좌석
@@ -782,10 +649,10 @@
       <section class="section" id="operations">
         <div class="section-inner">
           <div class="section-heading">
-            <h2>Launch Status</h2>
+            <h2>Operation Status</h2>
             <p>
-              취항 준비 현황과 공개 예정 노선을 한눈에 확인할 수 있습니다. 운항
-              정보는 노선 확정 단계에 맞춰 업데이트됩니다.
+              BVG의 운항 준비 현황과 첫 노선 구성을 한눈에 확인할 수 있습니다.
+              노선과 기단 정보는 데이터 파일에서 따로 관리합니다.
             </p>
           </div>
           <div class="stat-board" id="statBoard"></div>
@@ -795,10 +662,9 @@
       <section class="section" id="routes">
         <div class="section-inner">
           <div class="section-heading">
-            <h2>Planned Routes</h2>
+            <h2>Routes</h2>
             <p>
-              노선 카드는 <strong>data.js</strong>의 routes 배열만 수정하면 자동으로
-              바뀝니다.
+              첫 노선은 유럽권 B727-100 노선과 장거리 B707-320B 노선으로 구성됩니다.
             </p>
           </div>
           <div class="route-grid" id="routeGrid"></div>
@@ -809,14 +675,14 @@
         <div class="section-inner">
           <div class="section-heading">
             <h2>Destinations</h2>
-            <p>BER 기준 취항 예정지입니다. 여객과 화물 운항 여부도 데이터로 관리합니다.</p>
+            <p>도시명 기준의 BVG 첫 취항지 목록입니다. 공항명은 표시하지 않습니다.</p>
           </div>
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>취항지</th>
-                  <th>공항</th>
+                  <th>도시</th>
+                  <th>기재</th>
                   <th>여객</th>
                   <th>화물</th>
                   <th>상태</th>
@@ -832,10 +698,7 @@
         <div class="section-inner">
           <div class="section-heading">
             <h2>Fleet</h2>
-            <p>
-              도입 기재와 후보 기종은 <strong>data.js</strong>의 fleet 배열만
-              수정하면 화면에 반영됩니다.
-            </p>
+            <p>운용 기재는 유럽권 중거리용 B727-100과 장거리용 B707-320B로 구성됩니다.</p>
           </div>
           <div class="fleet-grid" id="fleetGrid"></div>
         </div>
@@ -844,16 +707,15 @@
       <section class="section" id="launch">
         <div class="section-inner">
           <div class="section-heading">
-            <h2>Launch Desk</h2>
-            <p>브랜드 공개부터 첫 정기 노선 발표까지의 준비 단계를 안내합니다.</p>
+            <h2>Operations Desk</h2>
+            <p>BVG의 노선 구성과 기단 운용 방향을 안내합니다.</p>
           </div>
           <div class="ops-layout">
             <aside class="panel">
-              <h3>Berlin First</h3>
+              <h3>Berlin Based</h3>
               <p>
-                BVG Airlines는 베를린을 출발점으로 삼아 유럽 주요 도시를 연결하는
-                네트워크를 준비하고 있습니다. 초기 노선은 운항 안정성과 수요를
-                기준으로 순차 공개됩니다.
+                BVG는 Berlin을 출발점으로 유럽 주요 도시와 장거리 거점을 연결합니다.
+                유럽권은 B727-100, 장거리 노선은 B707-320B로 구분해 운용합니다.
               </p>
             </aside>
             <div class="milestone-list" id="milestoneList"></div>
@@ -866,8 +728,8 @@
           <div class="section-heading">
             <h2>Customer Center</h2>
             <p>
-              노선 제안, 기단 설정, 사이트 수정 요청을 접수할 수 있는 문의 폼입니다.
-              실제 메일 알림은 폼 서비스 연결 후 활성화됩니다.
+              노선 제안, 기단 설정, 사이트 수정 요청을 접수할 수 있는 문의 영역입니다.
+              실제 알림은 별도 폼 서비스 연결 후 사용할 수 있습니다.
             </p>
           </div>
           <div class="contact-layout">
@@ -878,8 +740,7 @@
                 경우 연락 가능한 이메일을 함께 입력해 주세요.
               </p>
               <div class="fiction-note">
-                이 웹사이트는 포트폴리오용 가상 항공사 프로젝트입니다. 실제 항공권
-                예약, 결제, 운송 서비스를 제공하지 않습니다.
+                이 웹사이트는 ATO3 게임 내 항공사 BVG의 홈페이지입니다.
               </div>
             </aside>
             <form class="panel contact-form" id="contactForm" method="post">
@@ -923,8 +784,8 @@
 
     <footer class="footer">
       <div class="footer-inner">
-        <strong>BVG Airlines</strong>
-        <span id="footerNotice">본 사이트는 포트폴리오용 가상 항공사 웹사이트입니다.</span>
+        <strong>BVG</strong>
+        <span id="footerNotice">ATO3 게임 내 항공사 BVG의 공식 홈페이지입니다.</span>
       </div>
     </footer>
 
@@ -943,7 +804,7 @@
       const formNote = document.querySelector("#formNote");
 
       function routeLabel(route) {
-        return `${route.fromCode} - ${route.toCode}`;
+        return `${route.from} - ${route.to}`;
       }
 
       function yesNo(value) {
@@ -951,12 +812,12 @@
       }
 
       function renderSummary() {
-        document.querySelector("#hubAirport").textContent =
-          `${siteData.hub.city} ${siteData.hub.code}`;
+        document.querySelector("#hubCity").textContent = siteData.hub.city;
         document.querySelector("#airlineStatus").textContent = siteData.status.label;
-        document.querySelector("#launchAircraft").textContent =
-          siteData.fleet[0].type.replace("B", "");
-        document.querySelector("#launchTarget").textContent = siteData.status.launchTarget;
+        document.querySelector("#launchAircraft").textContent = siteData.fleet
+          .map((aircraft) => aircraft.type)
+          .join(" / ");
+        document.querySelector("#networkCount").textContent = `${siteData.routes.length} routes`;
         document.querySelector("#footerNotice").textContent = siteData.brand.notice;
       }
 
@@ -979,14 +840,14 @@
 
         routeGrid.innerHTML = siteData.routes
           .map((route) => {
-            origins.add(`${route.from} ${route.fromCode}`);
-            destinations.add(`${route.to} ${route.toCode}`);
+            origins.add(route.from);
+            destinations.add(route.to);
 
             return `
               <article class="route-card">
                 <div class="card-top">
                   <span>${route.number}</span>
-                  <span class="route-code">${routeLabel(route)}</span>
+                  <span class="route-code">${route.aircraft}</span>
                 </div>
                 <div>
                   <h3>${route.to}</h3>
@@ -1009,7 +870,7 @@
         contactRouteSelect.innerHTML =
           '<option value="">선택</option>' +
           siteData.routes
-            .map((route) => `<option>${routeLabel(route)} ${route.to}</option>`)
+            .map((route) => `<option>${routeLabel(route)} · ${route.aircraft}</option>`)
             .join("");
       }
 
@@ -1019,7 +880,7 @@
             (destination) => `
               <tr>
                 <td>${destination.city}</td>
-                <td>${destination.code}</td>
+                <td>${destination.aircraft}</td>
                 <td>${yesNo(destination.passenger)}</td>
                 <td>${yesNo(destination.cargo)}</td>
                 <td>${destination.status}</td>
@@ -1090,7 +951,7 @@
         if (!siteData.contact.formEndpoint) {
           event.preventDefault();
           formNote.textContent =
-            "아직 실제 알림 연결 전입니다. Formspree 주소를 data.js에 넣으면 메일 알림을 받을 수 있습니다.";
+            "아직 실제 알림 연결 전입니다. Formspree 주소를 data.js에 넣으면 이메일 알림을 받을 수 있습니다.";
           return;
         }
 
