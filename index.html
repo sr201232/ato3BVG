@@ -110,7 +110,6 @@
         color: var(--yellow-dark);
       }
 
-      .nav-cta,
       .primary-btn {
         border: 0;
         border-radius: 6px;
@@ -118,11 +117,6 @@
         color: var(--white);
         font-weight: 900;
         cursor: pointer;
-      }
-
-      .nav-cta {
-        min-width: max-content;
-        padding: 12px 18px;
       }
 
       .hero {
@@ -172,8 +166,10 @@
       .hero h1 {
         margin: 0;
         color: var(--white);
-        font-size: clamp(68px, 12vw, 148px);
-        line-height: 0.9;
+        max-width: 900px;
+        font-size: clamp(52px, 8vw, 104px);
+        line-height: 1.02;
+        word-break: keep-all;
       }
 
       .hero-copy p {
@@ -183,17 +179,6 @@
         font-size: clamp(18px, 2.4vw, 28px);
         line-height: 1.45;
         word-break: keep-all;
-      }
-
-      .slogan {
-        display: inline-flex;
-        margin-top: 26px;
-        border: 1px solid rgba(255, 255, 255, 0.38);
-        border-radius: 999px;
-        padding: 10px 16px;
-        color: var(--white);
-        font-size: 15px;
-        font-weight: 900;
       }
 
       .booking {
@@ -341,7 +326,146 @@
       .route-map {
         min-height: 520px;
         overflow: hidden;
-        background: linear-gradient(180deg, #f7fbff 0%, #eef5fb 100%);
+        background: #111827;
+      }
+
+      .route-map > svg {
+        display: none;
+      }
+
+      .route-diagram {
+        position: relative;
+        min-height: 520px;
+        border-radius: 7px;
+        overflow: hidden;
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+          linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+          radial-gradient(circle at 50% 50%, rgba(247, 221, 18, 0.18), transparent 25%),
+          #111827;
+        background-size: 76px 76px, 76px 76px, auto, auto;
+        padding: 28px;
+      }
+
+      .route-diagram-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        color: var(--white);
+      }
+
+      .route-diagram-head strong {
+        display: block;
+        font-size: 24px;
+      }
+
+      .route-diagram-head span,
+      .route-zone-title,
+      .route-via {
+        color: rgba(255, 255, 255, 0.64);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .route-diagram-body {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 170px 1fr;
+        gap: 20px;
+        align-items: center;
+        min-height: 405px;
+      }
+
+      .route-hub {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        place-items: center;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        border: 3px solid #ffffff;
+        border-radius: 999px;
+        background: var(--yellow);
+        box-shadow: 0 0 0 18px rgba(247, 221, 18, 0.13);
+        color: var(--ink);
+        text-align: center;
+        font-weight: 900;
+      }
+
+      .route-hub strong {
+        display: block;
+        font-size: 26px;
+      }
+
+      .route-hub span {
+        display: block;
+        margin-top: 5px;
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+
+      .route-zone {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 7px;
+        background: rgba(255, 255, 255, 0.055);
+        padding: 18px;
+      }
+
+      .route-zone.left::after,
+      .route-zone.right::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 56px;
+        border-top: 2px solid rgba(247, 221, 18, 0.72);
+      }
+
+      .route-zone.left::after {
+        right: -56px;
+      }
+
+      .route-zone.right::before {
+        left: -56px;
+      }
+
+      .route-city-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .route-city {
+        min-height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 9px 10px;
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .route-city::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        flex: 0 0 8px;
+        border-radius: 999px;
+        background: var(--yellow);
+      }
+
+      .route-via {
+        color: var(--yellow);
       }
 
       .route-map svg {
@@ -351,69 +475,87 @@
         min-height: 470px;
       }
 
-      .map-water {
-        fill: #edf5fb;
+      .route-map > svg {
+        display: none;
+      }
+
+      .map-bg {
+        fill: #111827;
       }
 
       .map-grid {
         fill: none;
-        stroke: #d8e3eb;
+        stroke: rgba(255, 255, 255, 0.08);
         stroke-width: 1;
       }
 
-      .map-land {
-        fill: #dce5de;
-        stroke: #c5d1ca;
+      .map-zone {
+        fill: rgba(255, 255, 255, 0.035);
+        stroke: rgba(255, 255, 255, 0.12);
         stroke-width: 1.2;
       }
 
       .map-line {
         fill: none;
-        stroke: #17191e;
-        stroke-width: 2.3;
+        stroke: var(--yellow);
+        stroke-width: 2.6;
         stroke-linecap: round;
-        opacity: 0.56;
+        opacity: 0.86;
       }
 
       .map-line.long {
-        stroke-width: 1.9;
-        stroke-dasharray: 7 7;
-        opacity: 0.52;
+        stroke: #ffffff;
+        stroke-width: 2.1;
+        stroke-dasharray: 6 8;
+        opacity: 0.62;
       }
 
       .map-hub {
         fill: var(--yellow);
-        stroke: var(--ink);
+        stroke: #ffffff;
         stroke-width: 3;
       }
 
       .map-dot {
-        fill: var(--white);
-        stroke: var(--ink);
+        fill: #111827;
+        stroke: #ffffff;
         stroke-width: 2.4;
       }
 
       .map-label {
-        fill: var(--ink);
-        font-size: 12px;
+        fill: #ffffff;
+        font-size: 13px;
         font-weight: 900;
       }
 
       .map-note {
-        fill: var(--muted);
+        fill: rgba(255, 255, 255, 0.62);
         font-size: 11px;
         font-weight: 800;
       }
 
       .map-plane {
-        fill: var(--ink);
+        fill: var(--yellow);
         font-size: 16px;
         font-weight: 900;
       }
 
       .map-legend {
-        fill: rgba(255, 255, 255, 0.86);
-        stroke: #d8e3eb;
+        fill: rgba(255, 255, 255, 0.08);
+        stroke: rgba(255, 255, 255, 0.18);
+      }
+
+      .map-caption {
+        fill: var(--yellow);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .map-via {
+        fill: rgba(255, 255, 255, 0.78);
+        font-size: 10px;
+        font-weight: 900;
       }
 
       .route-list {
@@ -488,6 +630,43 @@
         color: var(--ink);
         font-size: 24px;
         font-weight: 800;
+      }
+
+      .fleet-visual {
+        width: 100%;
+        max-width: 310px;
+        aspect-ratio: 3.4 / 1;
+      }
+
+      .fleet-visual svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .aircraft-body {
+        fill: var(--yellow);
+        stroke: #b68d00;
+        stroke-width: 2;
+      }
+
+      .aircraft-wing,
+      .aircraft-tail,
+      .aircraft-engine {
+        fill: #e7bd06;
+        stroke: #9d7900;
+        stroke-width: 1.4;
+      }
+
+      .aircraft-window {
+        fill: #17191e;
+        opacity: 0.82;
+      }
+
+      .aircraft-mark {
+        fill: #17191e;
+        font-size: 18px;
+        font-weight: 900;
       }
 
       .fleet-count {
@@ -707,11 +886,10 @@
           <a href="#booking">예약</a>
           <a href="#network">노선망</a>
           <a href="#fleet">보유기재</a>
-          <a href="#company">BVG 소개</a>
+          <a href="#company">BVG Aviation 소개</a>
           <a href="#disclosure">기업공개</a>
           <a href="#support">고객센터</a>
         </div>
-        <a class="nav-cta" href="#booking">예약하기</a>
       </nav>
     </header>
 
@@ -720,9 +898,8 @@
       <div class="hero-inner">
         <div class="hero-copy">
           <div class="eyebrow">Now operating from Berlin</div>
-          <h1>BVG</h1>
-          <p>BVG는 베를린을 허브로 삼아 전 세계 주요 도시를 연결하는 ATO3 가상 항공사입니다.</p>
-          <span class="slogan" id="brandSlogan">BVG는 행복을 싣고</span>
+          <h1>BVG Aviation</h1>
+          <p>BVG는 행복을 싣고</p>
         </div>
 
         <form class="booking" id="booking">
@@ -847,6 +1024,50 @@
                 <text class="map-label" x="42" y="48">BVG Route Map</text>
                 <text class="map-note" x="42" y="68">Berlin hub network</text>
               </svg>
+              <div class="route-diagram" aria-hidden="true">
+                <div class="route-diagram-head">
+                  <div>
+                    <strong>BVG Aviation Network</strong>
+                    <span>Berlin hub routes</span>
+                  </div>
+                  <span>17 routes</span>
+                </div>
+                <div class="route-diagram-body">
+                  <div class="route-zone left">
+                    <div class="route-zone-title">Americas</div>
+                    <div class="route-city-grid">
+                      <div class="route-city">New York</div>
+                      <div class="route-city">Chicago</div>
+                      <div class="route-city">San Francisco <span class="route-via">via NYC</span></div>
+                    </div>
+                  </div>
+                  <div class="route-hub">
+                    <div>
+                      <strong>Berlin</strong>
+                      <span>BVG Hub</span>
+                    </div>
+                  </div>
+                  <div class="route-zone right">
+                    <div class="route-zone-title">Europe / Middle East / Asia</div>
+                    <div class="route-city-grid">
+                      <div class="route-city">Amsterdam</div>
+                      <div class="route-city">London</div>
+                      <div class="route-city">Paris</div>
+                      <div class="route-city">Barcelona</div>
+                      <div class="route-city">Madrid</div>
+                      <div class="route-city">Rome</div>
+                      <div class="route-city">Moscow</div>
+                      <div class="route-city">Istanbul</div>
+                      <div class="route-city">Cairo</div>
+                      <div class="route-city">Kuwait</div>
+                      <div class="route-city">Tokyo</div>
+                      <div class="route-city">Seoul</div>
+                      <div class="route-city">Guangzhou</div>
+                      <div class="route-city">Hong Kong</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </section>
 
             <section class="panel">
@@ -877,11 +1098,11 @@
         <div class="section-inner">
           <div class="company-layout">
             <div class="company-card">
-              <span>About BVG</span>
-              <strong id="companyTitle">BVG aviation</strong>
+              <span>About BVG Aviation</span>
+              <strong id="companyTitle">BVG Aviation</strong>
             </div>
             <div class="panel company-copy">
-              <h3>BVG 항공사 소개</h3>
+              <h3>BVG Aviation 소개</h3>
               <p id="companyIntro"></p>
             </div>
           </div>
@@ -951,12 +1172,12 @@
 
     <footer class="footer">
       <div class="footer-inner">
-        <strong>BVG</strong>
+        <strong>BVG Aviation</strong>
         <p id="footerNotice"></p>
       </div>
     </footer>
 
-    <script src="data.js?v=20260706-status-update"></script>
+    <script src="data.js?v=20260706-aviation-map-fleet"></script>
     <script>
       const tabs = document.querySelectorAll(".tab");
       const originSelect = document.querySelector("#originSelect");
@@ -973,7 +1194,6 @@
       const contactForm = document.querySelector("#contactForm");
       const formNote = document.querySelector("#formNote");
       const footerNotice = document.querySelector("#footerNotice");
-      const brandSlogan = document.querySelector("#brandSlogan");
       const usdToKrw = 1380;
 
       function routeLabel(route) {
@@ -1011,7 +1231,6 @@
               <div class="route-row">
                 <div>
                   <strong>${routeLabel(route)}</strong>
-                  ${route.via ? `<small>${route.to} 노선은 ${route.via} 경유로 표기됩니다.</small>` : ""}
                 </div>
                 <span class="status">${route.status}</span>
               </div>
@@ -1036,6 +1255,7 @@
             (aircraft) => `
               <article class="fleet-card">
                 <div class="fleet-identity">
+                  <div class="fleet-visual">${aircraftDrawing(aircraft.type)}</div>
                   <h3>${aircraft.type}</h3>
                   <div class="fleet-maker">${aircraft.maker}</div>
                   <span class="fleet-count">보유대수: ${aircraft.count}대</span>
@@ -1053,8 +1273,29 @@
           .join("");
       }
 
+      function aircraftDrawing(type) {
+        const engines =
+          type === "B727-100"
+            ? '<ellipse class="aircraft-engine" cx="218" cy="49" rx="7" ry="5" /><ellipse class="aircraft-engine" cx="232" cy="49" rx="7" ry="5" /><ellipse class="aircraft-engine" cx="225" cy="58" rx="7" ry="5" />'
+            : '<ellipse class="aircraft-engine" cx="116" cy="68" rx="9" ry="6" /><ellipse class="aircraft-engine" cx="154" cy="68" rx="9" ry="6" /><ellipse class="aircraft-engine" cx="116" cy="31" rx="9" ry="6" /><ellipse class="aircraft-engine" cx="154" cy="31" rx="9" ry="6" />';
+
+        return `
+          <svg viewBox="0 0 320 96" role="img" aria-label="${type} BVG gold livery">
+            <path class="aircraft-wing" d="M125 47 45 15c-7-3-12 5-6 10l67 45Z" />
+            <path class="aircraft-wing" d="M128 51 56 86c-7 3-12-5-6-10l59-47Z" />
+            <path class="aircraft-tail" d="M244 38 286 12c7-4 14 2 10 9l-26 36Z" />
+            <path class="aircraft-tail" d="M245 57 289 78c8 4 5 15-4 13l-42-10Z" />
+            <path class="aircraft-body" d="M20 48c26-22 164-24 247-13 28 4 45 10 45 15s-17 11-45 15c-83 11-221 9-247-17Z" />
+            <path class="aircraft-window" d="M64 43h96v5H64z" />
+            <circle class="aircraft-window" cx="180" cy="45" r="3" />
+            <circle class="aircraft-window" cx="194" cy="46" r="3" />
+            ${engines}
+            <text class="aircraft-mark" x="214" y="53">BVG</text>
+          </svg>
+        `;
+      }
+
       function renderCompany() {
-        brandSlogan.textContent = siteData.brand.slogan;
         companyTitle.textContent = siteData.company.title;
         companyIntro.textContent = siteData.company.intro;
       }
