@@ -1,14 +1,14 @@
 const siteData = {
   brand: {
-    name: "BVG",
+    name: "BVG Aviation",
     tagline: "Berlin hub airline",
     slogan: "BVG는 행복을 싣고",
     notice: "BVG는 ATO3 게임 내 가상 항공사입니다.",
   },
   company: {
-    title: "BVG aviation",
+    title: "BVG Aviation",
     intro:
-      "BVG aviation은 베를린 시민들의 발이 되어주고 있는 베를린 교통공사의 항공 부서로, 1965년 1월부터 베를린 시민들의 날개 역할을 맡게 되었습니다.",
+      "BVG Aviation은 베를린 시민들의 발이 되어주고 있는 베를린 교통공사의 항공 부서로, 1965년 1월부터 베를린 시민들의 날개 역할을 맡게 되었습니다. 1966년 1월부터는 BVG에서 독립하여 BVG Aviation이 되었습니다.",
   },
   routes: [
     { from: "Berlin", to: "Guangzhou", status: "운항 중" },
@@ -80,7 +80,7 @@ const siteData = {
     },
   ],
   disclosure: {
-    headline: "BVG는 투명하게 운항합니다.",
+    headline: "BVG는 정직한 운영을 추구합니다.",
     note: "한화 환산액은 임시 환율 1달러=1,380원 기준입니다.",
     reports: [
       {
