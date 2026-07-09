@@ -998,7 +998,7 @@
   </head>
   <body>
     <header class="site-header">
-      <nav class="nav" aria-label="二쇱슂 硫붾돱">
+      <nav class="nav" aria-label="주요 메뉴">
         <a class="brand" href="#top" aria-label="BVG home">
           <img class="brand-logo" src="bvg-logo.svg" alt="" />
           <span class="brand-word">
@@ -1148,16 +1148,11 @@
                 <circle class="map-dot" cx="646" cy="318" r="7" />
                 <text class="map-label" x="664" y="324">Hong Kong</text>
 
-                <text class="map-plane" x="250" y="156" transform="rotate(20 250 156)">??/text>
-                <text class="map-plane" x="492" y="170" transform="rotate(-20 492 170)">??/text>
-                <text class="map-plane" x="518" y="254" transform="rotate(24 518 254)">??/text>
-                <text class="map-plane" x="198" y="205" transform="rotate(-13 198 205)">??/text>
-
                 <rect class="map-legend" x="24" y="24" width="188" height="56" rx="8" />
                 <text class="map-label" x="42" y="48">BVG Route Map</text>
                 <text class="map-note" x="42" y="68">Berlin hub network</text>
               </svg>
-              <div class="route-diagram" aria-hidden="true">
+              <div class="route-diagram" id="routeDiagram" aria-label="전체 취항 도시 목록">
                 <svg class="route-map-art" viewBox="0 0 980 560" role="img">
                   <rect x="0" y="0" width="980" height="560" fill="#f7dd12" />
 
@@ -1299,13 +1294,14 @@
       </div>
     </footer>
 
-    <script src="data.js?v=20260706-avelo-style-map"></script>
+    <script src="data.js?v=20260709-network-1967"></script>
     <script>
       const tabs = document.querySelectorAll(".tab");
       const originSelect = document.querySelector("#originSelect");
       const destinationSelect = document.querySelector("#destinationSelect");
       const routeList = document.querySelector("#routeList");
       const routeCount = document.querySelector("#routeCount");
+      const routeDiagram = document.querySelector("#routeDiagram");
       const specialRouteList = document.querySelector("#specialRouteList");
       const fleetGrid = document.querySelector("#fleetGrid");
       const companyTitle = document.querySelector("#companyTitle");
@@ -1364,6 +1360,72 @@
           .filter((city) => city !== "베를린")
           .map((destination) => `<option>${destination}</option>`)
           .join("");
+      }
+
+      function routeGroups() {
+        const groups = [
+          {
+            title: "북미",
+            cities: ["뉴욕", "댈러스", "LA", "디트로이트", "애틀랜타", "보스턴", "샌프란시스코", "시카고", "샬럿"],
+          },
+          {
+            title: "유럽",
+            cities: ["런던", "로마", "이스탄불", "마드리드", "바르셀로나", "모스크바", "암스테르담", "오슬로", "파리"],
+          },
+          {
+            title: "아시아",
+            cities: ["오사카", "뉴델리", "도쿄", "광저우", "뭄바이", "홍콩", "베이징", "상하이", "방콕", "서울", "쿠알라룸푸르"],
+          },
+          {
+            title: "중동/아프리카",
+            cities: ["카이로", "쿠웨이트"],
+          },
+        ];
+
+        const served = new Set(siteData.routes.map((route) => route.to));
+        return groups
+          .map((group) => ({
+            ...group,
+            cities: group.cities.filter((city) => served.has(city)),
+          }))
+          .filter((group) => group.cities.length);
+      }
+
+      function renderRouteDiagram() {
+        routeDiagram.insertAdjacentHTML(
+          "beforeend",
+          `
+            <div class="route-diagram-head">
+              <strong>Berlin Hub Network</strong>
+              <span>${siteData.routes.length} destinations</span>
+            </div>
+            <div class="route-diagram-body">
+              <div class="route-zone left">
+                <span class="route-zone-title">${routeGroups()[0].title}</span>
+                <div class="route-city-grid">
+                  ${routeGroups()[0].cities.map((city) => `<span class="route-city">${city}</span>`).join("")}
+                </div>
+              </div>
+              <div class="route-hub">
+                <strong>베를린</strong>
+                <span>Hub</span>
+              </div>
+              <div class="route-zone right">
+                ${routeGroups()
+                  .slice(1)
+                  .map(
+                    (group) => `
+                      <span class="route-zone-title">${group.title}</span>
+                      <div class="route-city-grid">
+                        ${group.cities.map((city) => `<span class="route-city">${city}</span>`).join("")}
+                      </div>
+                    `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          `
+        );
       }
 
       function renderSpecialRoutes() {
@@ -1449,6 +1511,7 @@
 
       footerNotice.textContent = siteData.brand.notice;
       renderRoutes();
+      renderRouteDiagram();
       renderSpecialRoutes();
       renderFleet();
       renderCompany();
