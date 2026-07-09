@@ -963,36 +963,73 @@
 
       .disclosure-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
+        gap: 12px;
       }
 
       .metric-card {
+        display: grid;
+        grid-template-columns: 110px repeat(4, minmax(0, 1fr));
+        gap: 16px;
+        align-items: stretch;
         border: 1px solid var(--line);
         border-radius: 7px;
         background: var(--white);
-        padding: 24px;
+        padding: 18px;
       }
 
-      .metric-card span {
+      .metric-year {
+        display: grid;
+        align-content: center;
+        gap: 6px;
+        border-right: 1px solid var(--line);
+        padding-right: 16px;
+      }
+
+      .metric-year strong {
+        color: var(--ink);
+        font-size: 30px;
+        line-height: 1;
+      }
+
+      .metric-year span,
+      .metric-item span {
         display: block;
-        margin-bottom: 14px;
         color: var(--muted);
         font-size: 13px;
         font-weight: 900;
       }
 
-      .metric-card strong {
-        display: block;
-        margin-bottom: 8px;
-        font-size: clamp(28px, 4vw, 42px);
-        line-height: 1;
+      .metric-item {
+        display: grid;
+        align-content: start;
+        gap: 8px;
+        min-height: 86px;
+        border-radius: 6px;
+        background: #f8f9fb;
+        padding: 14px;
       }
 
-      .metric-card small {
+      .metric-item.profit {
+        background: #17191e;
+      }
+
+      .metric-item.profit span,
+      .metric-item.profit strong,
+      .metric-item.profit small {
+        color: #ffffff;
+      }
+
+      .metric-item strong {
+        display: block;
+        color: var(--ink);
+        font-size: clamp(20px, 2.6vw, 30px);
+        line-height: 1.05;
+      }
+
+      .metric-item small {
         color: #5d6673;
-        font-size: 14px;
-        line-height: 1.5;
+        font-size: 12px;
+        line-height: 1.35;
       }
 
       .disclosure-note {
@@ -1093,6 +1130,18 @@
 
         .route-map svg {
           min-height: 350px;
+        }
+
+        .metric-card {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .metric-year {
+          grid-column: 1 / -1;
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+          padding-right: 0;
+          padding-bottom: 14px;
         }
 
         .footer-inner {
@@ -1707,11 +1756,30 @@
           .map(
             (report) => `
               <article class="metric-card">
-                <span>${report.year} 총 수입</span>
-                <strong>${moneyLabel(report.revenueUsdK)}</strong>
-                <small>총 비용: ${moneyLabel(report.costUsdK)}</small>
-                <small>항공기 구매 비용: ${moneyLabel(report.aircraftPurchaseUsdK)}</small>
-                <small>순수익: ${moneyLabel(report.profitUsdK)}</small>
+                <div class="metric-year">
+                  <strong>${report.year}</strong>
+                  <span>운영 실적</span>
+                </div>
+                <div class="metric-item">
+                  <span>총 수입</span>
+                  <strong>${formatUsdK(report.revenueUsdK)}</strong>
+                  <small>${formatKrwFromUsdK(report.revenueUsdK)}</small>
+                </div>
+                <div class="metric-item">
+                  <span>총 비용</span>
+                  <strong>${formatUsdK(report.costUsdK)}</strong>
+                  <small>${formatKrwFromUsdK(report.costUsdK)}</small>
+                </div>
+                <div class="metric-item">
+                  <span>항공기 구매 비용</span>
+                  <strong>${formatUsdK(report.aircraftPurchaseUsdK)}</strong>
+                  <small>${formatKrwFromUsdK(report.aircraftPurchaseUsdK)}</small>
+                </div>
+                <div class="metric-item profit">
+                  <span>순수익</span>
+                  <strong>${formatUsdK(report.profitUsdK)}</strong>
+                  <small>${formatKrwFromUsdK(report.profitUsdK)}</small>
+                </div>
               </article>
             `
           )
