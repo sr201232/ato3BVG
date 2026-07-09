@@ -932,17 +932,17 @@
           </span>
         </a>
         <div class="nav-links" aria-label="?ъ씠??硫붾돱">
-          <a href="#booking">?덉빟</a>
-          <a href="#network">?몄꽑留?/a>
-          <a href="#fleet">蹂댁쑀湲곗옱</a>
-          <a href="#company">BVG Aviation ?뚭컻</a>
-          <a href="#disclosure">湲곗뾽怨듦컻</a>
+          <a href="#booking">예약</a>
+          <a href="#network">노선망</a>
+          <a href="#fleet">보유기재</a>
+          <a href="#company">BVG Aviation 소개</a>
+          <a href="#disclosure">기업공개</a>
         </div>
       </nav>
     </header>
 
     <section class="hero" id="top">
-      <img class="hero-image" src="bvg-hero-707-yellow.png" alt="BVG ??났湲? />
+      <img class="hero-image" src="bvg-hero-707-yellow.png" alt="BVG 항공기" />
       <div class="hero-inner">
         <div class="hero-copy">
           <div class="eyebrow">Now operating from Berlin</div>
@@ -952,9 +952,9 @@
 
         <form class="booking" id="booking">
           <div class="booking-tabs" role="tablist" aria-label="?덉빟 ?좏삎">
-            <button class="tab" type="button" aria-selected="true">??났沅?/button>
-            <button class="tab" type="button" aria-selected="false">?댄빆議고쉶</button>
-            <button class="tab" type="button" aria-selected="false">?덉빟?뺤씤</button>
+            <button class="tab" type="button" aria-selected="true">항공권</button>
+            <button class="tab" type="button" aria-selected="false">운항조회</button>
+            <button class="tab" type="button" aria-selected="false">예약확인</button>
           </div>
           <div class="booking-grid">
             <label>
@@ -975,13 +975,13 @@
             </label>
             <label>
               ?밴컼
-              <select aria-label="?밴컼 ??>
-                <option>?깆씤 1紐?/option>
-                <option>?깆씤 2紐?/option>
-                <option>媛議?4紐?/option>
+              <select aria-label="승객 수">
+                <option>성인 1명</option>
+                <option>성인 2명</option>
+                <option>가족 4명</option>
               </select>
             </label>
-            <button class="primary-btn" type="submit">寃??/button>
+            <button class="primary-btn" type="submit">검색</button>
           </div>
         </form>
       </div>
@@ -991,7 +991,7 @@
       <section class="section" id="network">
         <div class="section-inner">
           <div class="section-heading">
-            <h2>?댄빆?몄꽑留?/h2>
+            <h2>운항 노선망</h2>
             <p>踰좊?由곗쓣 以묒떖?쇰줈 ?댄빆 以묒씤 BVG 痍⑦빆 ?꾩떆?낅땲??</p>
           </div>
           <div class="route-section-grid">
@@ -1240,14 +1240,14 @@
       function formatKrwFromUsdK(value) {
         const eok = (value * 1000 * usdToKrw) / 100000000;
         if (eok < 1) {
-          return "1??誘몃쭔";
+          return "1억 미만";
         }
         if (eok >= 10000) {
           const jo = Math.floor(eok / 10000);
           const rest = Math.round(eok - jo * 10000);
-          return `??${jo}議?${rest.toLocaleString("ko-KR")}????;
+          return `${jo}조 ${rest.toLocaleString("ko-KR")}억`;
         }
-        return `??${Math.round(eok).toLocaleString("ko-KR")}????;
+        return `${Math.round(eok).toLocaleString("ko-KR")}억`;
       }
 
       function moneyLabel(value) {
@@ -1326,7 +1326,7 @@
             <small>* ??났湲?援щℓ 鍮꾩슜: ${moneyLabel(report.aircraftPurchaseUsdK)}</small>
           </article>
           <article class="metric-card">
-            <span>${report.year} ?쒖닔??/span>
+            <span>${report.year} 순수익</span>
             <strong>${moneyLabel(report.profitUsdK)}</strong>
             <small>珥??섏엯?먯꽌 珥?鍮꾩슜???쒖쇅??湲덉븸</small>
           </article>
@@ -1343,9 +1343,9 @@
       document.querySelector(".booking").addEventListener("submit", (event) => {
         event.preventDefault();
         const button = event.currentTarget.querySelector(".primary-btn");
-        button.textContent = "寃???꾨즺";
+        button.textContent = "검색 완료";
         window.setTimeout(() => {
-          button.textContent = "寃??;
+          button.textContent = "검색";
         }, 1400);
       });
 
