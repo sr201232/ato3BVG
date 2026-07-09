@@ -6,7 +6,7 @@
     <title>BVG</title>
     <meta
       name="description"
-      content="踰좊?由곗쓣 ?덈툕濡????멸퀎 二쇱슂 ?꾩떆瑜??곌껐?섎뒗 ATO3 媛????났??BVG"
+      content="베를린을 허브로 전 세계 주요 도시를 연결하는 ATO3 가상 항공사 BVG Aviation"
     />
     <link rel="stylesheet" href="bvg-chatbot.css?v=20260709" />
     <style>
@@ -315,6 +315,39 @@
         font-weight: 900;
         text-transform: uppercase;
         white-space: nowrap;
+      }
+
+      .special-banner {
+        background: var(--ink);
+        color: var(--white);
+      }
+
+      .special-banner-inner {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 24px;
+        align-items: center;
+        padding: 34px 0;
+      }
+
+      .special-banner h2 {
+        margin: 0 0 8px;
+        font-size: clamp(28px, 4vw, 48px);
+        line-height: 1.05;
+      }
+
+      .special-banner p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      .special-banner .tag {
+        background: var(--yellow);
+        color: var(--ink);
       }
 
       .route-section-grid {
@@ -666,6 +699,46 @@
         font-weight: 900;
       }
 
+      .special-route-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .special-route-card {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: var(--white);
+        padding: 22px;
+      }
+
+      .special-route-card h3 {
+        margin: 0 0 12px;
+        font-size: 24px;
+      }
+
+      .special-route-path {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .special-route-path span {
+        border-radius: 999px;
+        background: var(--yellow);
+        padding: 8px 11px;
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .special-route-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
       .fleet-grid {
         display: grid;
         gap: 18px;
@@ -888,7 +961,9 @@
         }
 
         .booking-grid,
+        .special-banner-inner,
         .route-section-grid,
+        .special-route-grid,
         .fleet-card,
         .company-layout,
         .disclosure-grid,
@@ -947,34 +1022,34 @@
         <div class="hero-copy">
           <div class="eyebrow">Now operating from Berlin</div>
           <h1>BVG Aviation</h1>
-          <p>BVG???됰났???ｊ퀬</p>
+          <p>BVG는 행복을 싣고</p>
         </div>
 
         <form class="booking" id="booking">
-          <div class="booking-tabs" role="tablist" aria-label="?덉빟 ?좏삎">
+          <div class="booking-tabs" role="tablist" aria-label="예약 유형">
             <button class="tab" type="button" aria-selected="true">항공권</button>
             <button class="tab" type="button" aria-selected="false">운항조회</button>
             <button class="tab" type="button" aria-selected="false">예약확인</button>
           </div>
           <div class="booking-grid">
             <label>
-              異쒕컻
-              <select id="originSelect" aria-label="異쒕컻吏"></select>
+              출발
+              <select id="originSelect" aria-label="출발지"></select>
             </label>
             <label>
-              ?꾩갑
-              <select id="destinationSelect" aria-label="?꾩갑吏"></select>
+              도착
+              <select id="destinationSelect" aria-label="도착지"></select>
             </label>
             <label>
-              醫뚯꽍
-              <select aria-label="醫뚯꽍">
+              좌석
+              <select aria-label="좌석">
                 <option>Economy</option>
                 <option>Premium</option>
                 <option>First</option>
               </select>
             </label>
             <label>
-              ?밴컼
+              승객
               <select aria-label="승객 수">
                 <option>성인 1명</option>
                 <option>성인 2명</option>
@@ -987,18 +1062,28 @@
       </div>
     </section>
 
+    <section class="special-banner" aria-label="관광지 순환 노선">
+      <div class="special-banner-inner">
+        <div>
+          <h2>관광지 순환 노선 운항</h2>
+          <p>휴양지와 남극 항로를 잇는 BVG Aviation의 특별 장거리 순환 노선이 시작됩니다.</p>
+        </div>
+        <span class="tag">New Leisure Routes</span>
+      </div>
+    </section>
+
     <main>
       <section class="section" id="network">
         <div class="section-inner">
           <div class="section-heading">
             <h2>운항 노선망</h2>
-            <p>踰좊?由곗쓣 以묒떖?쇰줈 ?댄빆 以묒씤 BVG 痍⑦빆 ?꾩떆?낅땲??</p>
+            <p>베를린을 중심으로 운항 중인 BVG Aviation 취항 도시입니다.</p>
           </div>
           <div class="route-section-grid">
-            <section class="panel route-map" aria-label="BVG ?댄빆?몄꽑留?洹몃┝">
+            <section class="panel route-map" aria-label="BVG 운항 노선망 그림">
               <svg viewBox="0 0 760 500" role="img" aria-labelledby="mapTitle mapDesc">
                 <title id="mapTitle">BVG route network</title>
-                <desc id="mapDesc">Berlin??以묒떖?쇰줈 BVG 痍⑦빆 ?꾩떆媛 ?곌껐???몄꽑留?洹몃┝</desc>
+                <desc id="mapDesc">베를린을 중심으로 BVG Aviation 취항 도시가 연결된 노선망 그림</desc>
                 <rect class="map-water" x="0" y="0" width="760" height="500" rx="18" />
                 <path class="map-grid" d="M80 0v500M190 0v500M300 0v500M410 0v500M520 0v500M630 0v500M0 100h760M0 200h760M0 300h760M0 400h760" />
                 <path class="map-land" d="M104 129c57-42 150-48 206-10 35 24 78 21 111 48 41 35 17 96-34 116-51 19-87-11-132 4-56 19-128-12-145-69-11-37-35-63-6-89z" />
@@ -1157,22 +1242,23 @@
             <section class="panel">
               <div class="panel-head">
                 <div>
-                  <h3>?댄빆 ?꾩떆</h3>
-                  <p>?꾩떆紐?湲곗??쇰줈 ?쒖떆?⑸땲??</p>
+                  <h3>운항 도시</h3>
+                  <p>도시명 기준으로 표시합니다.</p>
                 </div>
                 <span class="tag" id="routeCount">0 routes</span>
               </div>
               <div class="route-list" id="routeList"></div>
             </section>
           </div>
+          <div class="special-route-grid" id="specialRouteList"></div>
         </div>
       </section>
 
       <section class="section alt" id="fleet">
         <div class="section-inner">
           <div class="section-heading">
-            <h2>蹂댁쑀湲곗옱</h2>
-            <p>BVG媛 ?댁슜?섎뒗 ??났湲곗엯?덈떎.</p>
+            <h2>보유기재</h2>
+            <p>BVG Aviation이 운용하는 항공기입니다.</p>
           </div>
           <div class="fleet-grid" id="fleetGrid"></div>
         </div>
@@ -1186,7 +1272,7 @@
               <strong id="companyTitle">BVG Aviation</strong>
             </div>
             <div class="panel company-copy">
-              <h3>BVG Aviation ?뚭컻</h3>
+              <h3>BVG Aviation 소개</h3>
               <p id="companyIntro"></p>
             </div>
           </div>
@@ -1196,8 +1282,8 @@
       <section class="section alt" id="disclosure">
         <div class="section-inner">
           <div class="section-heading">
-            <h2>湲곗뾽怨듦컻</h2>
-            <p id="disclosureHeadline">BVG???щ챸?섍쾶 ?댄빆?⑸땲??</p>
+            <h2>기업공개</h2>
+            <p id="disclosureHeadline">BVG Aviation은 정직한 운영을 추구합니다.</p>
           </div>
           <div class="disclosure-grid" id="disclosureGrid"></div>
           <p class="disclosure-note" id="disclosureNote"></p>
@@ -1220,6 +1306,7 @@
       const destinationSelect = document.querySelector("#destinationSelect");
       const routeList = document.querySelector("#routeList");
       const routeCount = document.querySelector("#routeCount");
+      const specialRouteList = document.querySelector("#specialRouteList");
       const fleetGrid = document.querySelector("#fleetGrid");
       const companyTitle = document.querySelector("#companyTitle");
       const companyIntro = document.querySelector("#companyIntro");
@@ -1230,7 +1317,7 @@
       const usdToKrw = 1380;
 
       function routeLabel(route) {
-        return `${route.from} - ${route.to}${route.via ? ` (${route.via} 寃쎌쑀)` : ""}`;
+        return `${route.from} - ${route.to}${route.via ? ` (${route.via} 경유)` : ""}`;
       }
 
       function formatUsdK(value) {
@@ -1274,8 +1361,24 @@
         routeCount.textContent = `${siteData.routes.length} routes`;
         originSelect.innerHTML = [...origins].map((origin) => `<option>${origin}</option>`).join("");
         destinationSelect.innerHTML = siteData.servedCities
-          .filter((city) => city !== "Berlin")
+          .filter((city) => city !== "베를린")
           .map((destination) => `<option>${destination}</option>`)
+          .join("");
+      }
+
+      function renderSpecialRoutes() {
+        specialRouteList.innerHTML = siteData.specialRoutes
+          .map(
+            (route) => `
+              <article class="special-route-card">
+                <h3>${route.name}</h3>
+                <div class="special-route-path">
+                  ${route.path.map((city) => `<span>${city}</span>`).join("")}
+                </div>
+                <p>${route.description}</p>
+              </article>
+            `
+          )
           .join("");
       }
 
@@ -1311,26 +1414,21 @@
       }
 
       function renderDisclosure() {
-        const report = siteData.disclosure.reports[0];
         disclosureHeadline.textContent = siteData.disclosure.headline;
         disclosureNote.textContent = siteData.disclosure.note;
-        disclosureGrid.innerHTML = `
-          <article class="metric-card">
-            <span>${report.year} 珥??섏엯</span>
-            <strong>${moneyLabel(report.revenueUsdK)}</strong>
-            <small>BVG ?댄빆 ?섏엯 湲곗?</small>
-          </article>
-          <article class="metric-card">
-            <span>${report.year} 珥?鍮꾩슜</span>
-            <strong>${moneyLabel(report.costUsdK)}</strong>
-            <small>* ??났湲?援щℓ 鍮꾩슜: ${moneyLabel(report.aircraftPurchaseUsdK)}</small>
-          </article>
-          <article class="metric-card">
-            <span>${report.year} 순수익</span>
-            <strong>${moneyLabel(report.profitUsdK)}</strong>
-            <small>珥??섏엯?먯꽌 珥?鍮꾩슜???쒖쇅??湲덉븸</small>
-          </article>
-        `;
+        disclosureGrid.innerHTML = siteData.disclosure.reports
+          .map(
+            (report) => `
+              <article class="metric-card">
+                <span>${report.year} 총 수입</span>
+                <strong>${moneyLabel(report.revenueUsdK)}</strong>
+                <small>총 비용: ${moneyLabel(report.costUsdK)}</small>
+                <small>항공기 구매 비용: ${moneyLabel(report.aircraftPurchaseUsdK)}</small>
+                <small>순수익: ${moneyLabel(report.profitUsdK)}</small>
+              </article>
+            `
+          )
+          .join("");
       }
 
       tabs.forEach((tab) => {
@@ -1351,6 +1449,7 @@
 
       footerNotice.textContent = siteData.brand.notice;
       renderRoutes();
+      renderSpecialRoutes();
       renderFleet();
       renderCompany();
       renderDisclosure();
