@@ -363,6 +363,110 @@
         background: #111827;
       }
 
+      .modern-route-map {
+        min-height: 560px;
+        border-radius: 7px;
+        overflow: hidden;
+        background: var(--yellow);
+      }
+
+      .bvg-route-map {
+        display: block;
+        width: 100%;
+        min-height: 560px;
+      }
+
+      .bvg-map-bg {
+        fill: var(--yellow);
+      }
+
+      .bvg-map-land {
+        fill: #ffffff;
+      }
+
+      .bvg-map-border {
+        fill: none;
+        stroke: #e6e6e6;
+        stroke-width: 1.2;
+      }
+
+      .bvg-map-line {
+        fill: none;
+        stroke: rgba(62, 54, 86, 0.48);
+        stroke-width: 1.25;
+      }
+
+      .bvg-map-line.long {
+        stroke: rgba(62, 54, 86, 0.68);
+        stroke-width: 1.45;
+      }
+
+      .bvg-map-line.special {
+        stroke: #17191e;
+        stroke-width: 2.2;
+        stroke-dasharray: 8 7;
+      }
+
+      .bvg-map-node {
+        fill: #5b3294;
+        stroke: #ffffff;
+        stroke-width: 2.2;
+      }
+
+      .bvg-map-special-node {
+        fill: #17191e;
+        stroke: var(--yellow);
+        stroke-width: 2.5;
+      }
+
+      .bvg-map-hub {
+        fill: var(--yellow);
+        stroke: #17191e;
+        stroke-width: 4;
+      }
+
+      .bvg-map-label {
+        fill: #322848;
+        font-size: 12px;
+        font-weight: 900;
+        paint-order: stroke;
+        stroke: rgba(255, 255, 255, 0.78);
+        stroke-width: 3px;
+      }
+
+      .bvg-map-small {
+        fill: #5f536f;
+        font-size: 10px;
+        font-weight: 800;
+      }
+
+      .bvg-map-title {
+        fill: #ffffff;
+        font-size: 44px;
+        font-weight: 900;
+      }
+
+      .bvg-map-subtitle {
+        fill: rgba(255, 255, 255, 0.82);
+        font-size: 15px;
+        font-weight: 900;
+        letter-spacing: 3px;
+      }
+
+      .bvg-map-corner {
+        fill: #5b3294;
+      }
+
+      .bvg-map-badge {
+        fill: #17191e;
+      }
+
+      .bvg-map-badge-text {
+        fill: #ffffff;
+        font-size: 13px;
+        font-weight: 900;
+      }
+
       .route-map > svg {
         display: none;
       }
@@ -373,6 +477,10 @@
         border-radius: 7px;
         overflow: hidden;
         background: var(--yellow);
+      }
+
+      .route-map .route-diagram {
+        display: none;
       }
 
       .route-map-art {
@@ -1006,7 +1114,7 @@
             <span>Aviation</span>
           </span>
         </a>
-        <div class="nav-links" aria-label="?ъ씠??硫붾돱">
+        <div class="nav-links" aria-label="사이트 메뉴">
           <a href="#booking">예약</a>
           <a href="#network">노선망</a>
           <a href="#fleet">보유기재</a>
@@ -1081,6 +1189,7 @@
           </div>
           <div class="route-section-grid">
             <section class="panel route-map" aria-label="BVG 운항 노선망 그림">
+              <div class="modern-route-map" id="routeMapCanvas"></div>
               <svg viewBox="0 0 760 500" role="img" aria-labelledby="mapTitle mapDesc">
                 <title id="mapTitle">BVG route network</title>
                 <desc id="mapDesc">베를린을 중심으로 BVG Aviation 취항 도시가 연결된 노선망 그림</desc>
@@ -1294,11 +1403,12 @@
       </div>
     </footer>
 
-    <script src="data.js?v=20260709-network-1967"></script>
+    <script src="data.js?v=20260709-final-network-update"></script>
     <script>
       const tabs = document.querySelectorAll(".tab");
       const originSelect = document.querySelector("#originSelect");
       const destinationSelect = document.querySelector("#destinationSelect");
+      const routeMapCanvas = document.querySelector("#routeMapCanvas");
       const routeList = document.querySelector("#routeList");
       const routeCount = document.querySelector("#routeCount");
       const routeDiagram = document.querySelector("#routeDiagram");
@@ -1335,6 +1445,121 @@
 
       function moneyLabel(value) {
         return `${formatUsdK(value)} (${formatKrwFromUsdK(value)})`;
+      }
+
+      const routeMapCities = {
+        베를린: { x: 548, y: 250, label: "Berlin", side: "right" },
+        뉴욕: { x: 286, y: 270, label: "New York", side: "left" },
+        오사카: { x: 835, y: 290, label: "Osaka", side: "right" },
+        댈러스: { x: 235, y: 334, label: "Dallas", side: "left" },
+        뉴델리: { x: 720, y: 350, label: "New Delhi", side: "right" },
+        도쿄: { x: 858, y: 260, label: "Tokyo", side: "right" },
+        로마: { x: 536, y: 322, label: "Rome", side: "right" },
+        LA: { x: 142, y: 330, label: "LA", side: "left" },
+        이스탄불: { x: 596, y: 324, label: "Istanbul", side: "right" },
+        마드리드: { x: 468, y: 330, label: "Madrid", side: "left" },
+        광저우: { x: 800, y: 384, label: "Guangzhou", side: "right" },
+        뭄바이: { x: 710, y: 400, label: "Mumbai", side: "right" },
+        디트로이트: { x: 245, y: 246, label: "Detroit", side: "left" },
+        바르셀로나: { x: 490, y: 318, label: "Barcelona", side: "left" },
+        홍콩: { x: 826, y: 402, label: "Hong Kong", side: "right" },
+        런던: { x: 480, y: 234, label: "London", side: "left" },
+        모스크바: { x: 610, y: 202, label: "Moscow", side: "right" },
+        암스테르담: { x: 508, y: 236, label: "Amsterdam", side: "left" },
+        오슬로: { x: 528, y: 190, label: "Oslo", side: "left" },
+        파리: { x: 495, y: 270, label: "Paris", side: "left" },
+        베이징: { x: 780, y: 244, label: "Beijing", side: "right" },
+        애틀랜타: { x: 255, y: 318, label: "Atlanta", side: "left" },
+        상하이: { x: 812, y: 326, label: "Shanghai", side: "right" },
+        보스턴: { x: 300, y: 248, label: "Boston", side: "left" },
+        샌프란시스코: { x: 124, y: 302, label: "San Francisco", side: "left" },
+        방콕: { x: 778, y: 430, label: "Bangkok", side: "right" },
+        서울: { x: 828, y: 276, label: "Seoul", side: "right" },
+        카이로: { x: 582, y: 385, label: "Cairo", side: "right" },
+        시카고: { x: 230, y: 262, label: "Chicago", side: "left" },
+        쿠웨이트: { x: 635, y: 368, label: "Kuwait", side: "right" },
+        쿠알라룸푸르: { x: 792, y: 462, label: "Kuala Lumpur", side: "right" },
+        샬럿: { x: 272, y: 305, label: "Charlotte", side: "left" },
+        아바나: { x: 286, y: 390, label: "Havana", side: "left", special: true },
+        파페에테: { x: 98, y: 506, label: "Papeete", side: "left", special: true },
+        케이프타운: { x: 552, y: 500, label: "Cape Town", side: "right", special: true },
+        크라이스트처치: { x: 920, y: 520, label: "Christchurch", side: "right", special: true },
+      };
+
+      function routeCurve(from, to) {
+        const dx = Math.abs(to.x - from.x);
+        const midX = (from.x + to.x) / 2;
+        const midY = (from.y + to.y) / 2;
+        const lift = dx > 420 ? -125 : dx > 240 ? -70 : -35;
+        return `M${from.x} ${from.y} Q${midX} ${midY + lift} ${to.x} ${to.y}`;
+      }
+
+      function specialRoutePath(path) {
+        return path
+          .map((city) => routeMapCities[city])
+          .filter(Boolean)
+          .map((point, index, points) => {
+            if (index === 0) return `M${point.x} ${point.y}`;
+            const previous = points[index - 1];
+            const midX = (previous.x + point.x) / 2;
+            const midY = (previous.y + point.y) / 2;
+            const lift = point.y > 470 || previous.y > 470 ? -45 : 65;
+            return `Q${midX} ${midY + lift} ${point.x} ${point.y}`;
+          })
+          .join(" ");
+      }
+
+      function renderRouteMap() {
+        const hub = routeMapCities.베를린;
+        const regularCities = siteData.routes
+          .map((route) => routeMapCities[route.to])
+          .filter(Boolean);
+        const specialCities = [...new Set(siteData.specialRoutes.flatMap((route) => route.path))]
+          .map((city) => routeMapCities[city])
+          .filter((point) => point && point.special);
+
+        routeMapCanvas.innerHTML = `
+          <svg class="bvg-route-map" viewBox="0 0 1040 620" role="img" aria-label="BVG Aviation 운항 노선 지도">
+            <rect class="bvg-map-bg" width="1040" height="620" />
+            <path class="bvg-map-land" d="M110 95c95-47 230-58 354-32 70 15 120 20 192 2 95-24 221 7 279 87 56 78 35 174-43 232-83 61-206 66-320 42-105-22-174-10-252 15-100 32-205 17-249-62-45-80-28-222 39-284z" />
+            <path class="bvg-map-land" d="M438 426c74-24 154-13 210 26 54 38 62 92 24 124-39 33-128 25-194 0-67-26-107-67-94-105 8-22 24-36 54-45z" />
+            <path class="bvg-map-land" d="M702 92c78-30 170-10 221 44 50 53 43 124-17 160-62 37-155 20-203-31-50-53-64-151-1-173z" />
+            <path class="bvg-map-land" d="M788 316c53-20 115-5 146 37 27 39 12 94-37 118-52 25-122 8-153-38-31-46-8-97 44-117z" />
+            <path class="bvg-map-border" d="M170 82 142 420M292 70 276 440M421 72 430 440M552 70 532 440M690 82 648 426M817 114 740 396" />
+            <path class="bvg-map-border" d="M76 188h840M52 282h860M64 370h804M184 112c72 52 172 63 270 43M500 116c98 45 215 38 308 0" />
+            ${regularCities
+              .map((city) => `<path class="bvg-map-line ${Math.abs(city.x - hub.x) > 360 ? "long" : ""}" d="${routeCurve(hub, city)}" />`)
+              .join("")}
+            ${siteData.specialRoutes
+              .map((route) => `<path class="bvg-map-line special" d="${specialRoutePath(route.path)}" />`)
+              .join("")}
+            <circle class="bvg-map-hub" cx="${hub.x}" cy="${hub.y}" r="13" />
+            <text class="bvg-map-label" x="${hub.x + 18}" y="${hub.y - 5}">Berlin</text>
+            <text class="bvg-map-small" x="${hub.x + 18}" y="${hub.y + 12}">BVG Hub</text>
+            ${regularCities
+              .map(
+                (city) => `
+                  <circle class="bvg-map-node" cx="${city.x}" cy="${city.y}" r="6" />
+                  <text class="bvg-map-label" x="${city.side === "left" ? city.x - 10 : city.x + 10}" y="${city.y + 4}" text-anchor="${city.side === "left" ? "end" : "start"}">${city.label}</text>
+                `
+              )
+              .join("")}
+            ${specialCities
+              .map(
+                (city) => `
+                  <circle class="bvg-map-special-node" cx="${city.x}" cy="${city.y}" r="7" />
+                  <text class="bvg-map-label" x="${city.side === "left" ? city.x - 10 : city.x + 10}" y="${city.y + 4}" text-anchor="${city.side === "left" ? "end" : "start"}">${city.label}</text>
+                `
+              )
+              .join("")}
+            <path class="bvg-map-corner" d="M0 620V448l360 172Z" />
+            <text class="bvg-map-title" x="35" y="565">BVG</text>
+            <text class="bvg-map-subtitle" x="38" y="594">AVIATION</text>
+            <rect class="bvg-map-badge" x="30" y="30" width="238" height="64" rx="8" />
+            <text class="bvg-map-badge-text" x="50" y="56">Berlin Hub Route Map</text>
+            <text class="bvg-map-small" x="50" y="76" fill="#ffffff">${siteData.routes.length} regular destinations + ${siteData.specialRoutes.length} leisure routes</text>
+          </svg>
+        `;
       }
 
       function renderRoutes() {
@@ -1511,6 +1736,7 @@
 
       footerNotice.textContent = siteData.brand.notice;
       renderRoutes();
+      renderRouteMap();
       renderRouteDiagram();
       renderSpecialRoutes();
       renderFleet();
