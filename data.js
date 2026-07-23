@@ -54,12 +54,17 @@ const siteData = {
     {
       name: "휴양지 순환 노선",
       path: ["베를린", "아바나", "파페에테"],
-      description: "장거리 휴양 수요를 겨냥한 BVG Aviation의 관광 순환 노선입니다.",
+      description: "유명한 휴양지인 하바나와 파페에테로 떠나보세요!",
     },
     {
       name: "남극 항로 노선",
       path: ["베를린", "케이프타운", "크라이스트처치"],
-      description: "남극 항로 운항을 위해 기획된 특수 장거리 순환 노선입니다.",
+      description: "비행기에 앉아서 남극의 모습을 구경하세요!",
+    },
+    {
+      name: "아이슬란드 노선",
+      path: ["베를린", "레이캬비크"],
+      description: "복고풍의 항공기를 타고 북극으로 떠나보세요!",
     },
   ],
   servedCities: ["베를린", ...regularDestinations],
